@@ -1,4 +1,4 @@
-package app;
+package app.record;
 
 public class Activity {
     private String description;

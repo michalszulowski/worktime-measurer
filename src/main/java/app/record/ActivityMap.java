@@ -1,4 +1,4 @@
-package app;
+package app.record;
 
 import java.util.HashMap;
 

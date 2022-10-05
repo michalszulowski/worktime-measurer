@@ -1,8 +1,9 @@
-package app;
+package app.record;
 
 import java.time.LocalDateTime;
 
 public interface RecordCreator {
+    WorkRecord initRecord();
     void startRecord();
     void startRecordAt(LocalDateTime at);
     void endRecord();

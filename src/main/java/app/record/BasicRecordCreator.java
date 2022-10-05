@@ -1,9 +1,15 @@
-package app;
+package app.record;
 
 import java.time.LocalDateTime;
 
 public class BasicRecordCreator implements RecordCreator {
-    private WorkRecord createdRecord;
+    private WorkRecord record;
+
+    @Override
+    public WorkRecord initRecord() {
+        record = new WorkRecord();
+        return record;
+    }
 
     @Override
     public void startRecord() {
@@ -12,7 +18,7 @@ public class BasicRecordCreator implements RecordCreator {
 
     @Override
     public void startRecordAt(LocalDateTime at) {
-        createdRecord.setStart(at);
+        record.start = at;
     }
 
     @Override
@@ -22,21 +28,21 @@ public class BasicRecordCreator implements RecordCreator {
 
     @Override
     public void endRecordAt(LocalDateTime at) {
-        createdRecord.setEnd(at);
+        record.end = at;
     }
 
     @Override
     public void addActivity(Activity activity, float wage) {
-        createdRecord.addActivity(activity, wage);
+        record.addActivity(activity, wage);
     }
 
     @Override
     public void setDescription(String description) {
-        createdRecord.setDescription(description);
+        record.description = description;
     }
 
     @Override
     public WorkRecord getRecord() {
-        return createdRecord;
+        return record;
     }
 }
