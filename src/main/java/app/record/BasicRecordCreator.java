@@ -3,11 +3,11 @@ package app.record;
 import java.time.LocalDateTime;
 
 public class BasicRecordCreator implements RecordCreator {
-    private WorkRecord record;
+    private ActivityMapWorkRecord record;
 
     @Override
-    public WorkRecord initRecord() {
-        record = new WorkRecord();
+    public ActivityMapWorkRecord initRecord() {
+        record = new ActivityMapWorkRecord();
         return record;
     }
 
@@ -18,7 +18,7 @@ public class BasicRecordCreator implements RecordCreator {
 
     @Override
     public void startRecordAt(LocalDateTime at) {
-        record.start = at;
+        //record.start = at;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class BasicRecordCreator implements RecordCreator {
 
     @Override
     public void endRecordAt(LocalDateTime at) {
-        record.end = at;
+        //record.end = at;
     }
 
     @Override
@@ -38,11 +38,11 @@ public class BasicRecordCreator implements RecordCreator {
 
     @Override
     public void setDescription(String description) {
-        record.description = description;
+        //record.description = description;
     }
 
     @Override
-    public WorkRecord getRecord() {
+    public ActivityMapWorkRecord getRecord() {
         return record;
     }
 }

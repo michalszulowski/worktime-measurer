@@ -2,7 +2,7 @@ package app.ui.terminal;
 
 import app.backend.engine.Engine;
 import app.lang.UiLangMap;
-import app.record.WorkRecord;
+import app.record.ActivityMapWorkRecord;
 import app.util.Time;
 
 import java.time.LocalDate;
@@ -35,7 +35,7 @@ public class RecentStatistics implements TerminalFrameElement {
 
     private void printDayBeforeWorkTime() {
         LocalDate dayBefore = LocalDate.now().minusDays(1);
-        Optional<WorkRecord> recordOfDayBefore = appEngine.getRecord(dayBefore);
+        Optional<ActivityMapWorkRecord> recordOfDayBefore = appEngine.getRecord(dayBefore);
         String dayBeforeWorkTime = recordOfDayBefore.isEmpty() ?
                 "-" : Time.getHours(recordOfDayBefore.get().calculateTotalTime()) + "";
         outStream.println(langMap.getText("Yesterday worked") + ": " + dayBeforeWorkTime);

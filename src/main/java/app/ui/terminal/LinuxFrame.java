@@ -2,19 +2,24 @@ package app.ui.terminal;
 
 import app.backend.engine.Engine;
 import app.lang.UiLangMap;
-import app.record.WorkRecord;
-import app.util.Time;
+import app.record.ActivityMapWorkRecord;
 
 public class LinuxFrame extends AbstractTputFrame {
     private Engine appEngine;
     private UiLangMap langMap;
     private OutStream outStream;
-    private WorkRecord lastDayRecord;
-    private double lastDayWorkTime;
-    private TerminalFrameElement progressBar;
+    private ActivityMapWorkRecord lastDayRecord;
+    private ActivityMapWorkRecord recordDayBeforeRecord;
+
     private TerminalFrameElement recentStatistics;
+    private TerminalFrameElement progressBar;
 
-
+    public LinuxFrame(int consoleWidth, int consoleHeight, Engine appEngine, UiLangMap langMap) {
+        super(consoleWidth, consoleHeight);
+        this.appEngine = appEngine;
+        this.langMap = langMap;
+        init();
+    }
 
     @Override
     public void print() {
@@ -24,7 +29,10 @@ public class LinuxFrame extends AbstractTputFrame {
     }
 
     private void init() {
-        lastDayWorkTime = Time.getHours(lastDayRecord.calculateTotalTime());
+        //double lastDayWorkTime = Time.getHours(lastDayRecord.calculateTotalTime());
+        //double dayBeforeWorkTime = Time.getHours()
+        recentStatistics = new RecentStatistics(outStream, langMap, appEngine, 10);
+        progressBar = new SimpleProgressBar(outStream, consoleWidth, 10, 15);
     }
 
     private void printCurrentSessionData() {

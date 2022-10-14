@@ -1,0 +1,21 @@
+{
+	"date": "1970-01-01",
+	"work_records": [
+		{
+			"start": "8:00",
+			"end": "10:00",
+			"subtractedTime": 1.5,
+			"description": "work",
+			"activities": [
+				{
+					"description": "Making abc",
+					"wage": 1.0
+				},
+				{
+					"description": "Making xyz",
+					"wage": 2.0
+				}	
+			]
+		}
+	]
+}
