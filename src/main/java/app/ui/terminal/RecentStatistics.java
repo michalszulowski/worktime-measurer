@@ -34,22 +34,29 @@ public class RecentStatistics implements TerminalFrameElement {
     }
 
     private void printDayBeforeWorkTime() {
+        /*
         LocalDate dayBefore = LocalDate.now().minusDays(1);
         Optional<ActivityMapWorkRecord> recordOfDayBefore = appEngine.getRecord(dayBefore);
         String dayBeforeWorkTime = recordOfDayBefore.isEmpty() ?
                 "-" : Time.getHours(recordOfDayBefore.get().calculateTotalTime()) + "";
         outStream.println(langMap.getText("Yesterday worked") + ": " + dayBeforeWorkTime);
+         */
     }
 
     private void printLastWeekAverage() {
+        /*
         Optional<Float> lastWeekAverage = appEngine.getAverageHoursWorkedInLast(7);
         String lastWeekAverageWorkTime = lastWeekAverage.isEmpty() ? "-" : lastWeekAverage.get() + "";
         outStream.println(langMap.getText("Average work time in last week") + ": " + lastWeekAverageWorkTime);
+
+         */
     }
 
     private void printLastMonthAverage() {
+        /*
         Optional<Float> lastMonthAverage = appEngine.getAverageHoursWorkedInLast(30);
         String lastMonthAverageWorkTime = lastMonthAverage.isEmpty() ? "-" : lastMonthAverage.get() + "";
         outStream.println(langMap.getText("Average work time in last month") + ": " + lastMonthAverageWorkTime);
+         */
     }
 }

@@ -76,7 +76,7 @@ public class SimpleProgressBar implements TerminalFrameElement {
     }
 
     private static SimpleProgressBar getBarOf(float hoursWorked, float hoursWorkedDayBefore) {
-        int consoleWidth = 3;
+        int consoleWidth = 20;
         return new SimpleProgressBar(new TerminalOutStream(), consoleWidth, hoursWorked, hoursWorkedDayBefore);
     }
 }
