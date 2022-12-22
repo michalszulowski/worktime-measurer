@@ -6,7 +6,8 @@ import java.time.LocalDateTime;
 public class ActivityMapWorkRecord extends SimpleWorkRecord {
     private ActivityMap activities;
 
-    public ActivityMapWorkRecord() {
+    public ActivityMapWorkRecord(LocalDateTime start, LocalDateTime end, String description) {
+        super(start, end, description);
         activities = new ActivityMap();
     }
 

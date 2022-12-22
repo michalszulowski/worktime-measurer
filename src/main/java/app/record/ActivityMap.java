@@ -1,24 +1,30 @@
 package app.record;
 
 import java.util.HashMap;
+import java.util.Map;
 
-//Map with values representing some abstract relative wage of activity
-public class ActivityMap extends HashMap<Activity, Float> {
+/**
+ * Map with values representing some abstract relative wage of activity
+ */
+public class ActivityMap {
+    private Map<Activity, Float> wageMap;
     private float wagesSum;
 
     public ActivityMap() {
+        wageMap = new HashMap<>();
         wagesSum = 0;
     }
 
-    @Override
     public Float put(Activity key, Float value) {
         wagesSum += value;
-        return super.put(key, value);
+        return wageMap.put(key, value);
     }
 
-    //returns values in <0, 1> range;
+    /**
+     * @return values in <0, 1> range
+     */
     public float getRelativeShare(Activity key) {
-        float wage = get(key);
+        float wage = wageMap.get(key);
         return wage/wagesSum;
     }
 }

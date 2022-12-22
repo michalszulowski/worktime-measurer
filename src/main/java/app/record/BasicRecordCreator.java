@@ -7,8 +7,9 @@ public class BasicRecordCreator implements RecordCreator {
 
     @Override
     public ActivityMapWorkRecord initRecord() {
-        record = new ActivityMapWorkRecord();
-        return record;
+        //record = new ActivityMapWorkRecord();
+        //return record;
+        return null;
     }
 
     @Override

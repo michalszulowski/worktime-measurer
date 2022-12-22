@@ -2,11 +2,13 @@ package app.record;
 
 public class Activity {
     private String description;
-    //private Category category;
+    //TODO think about categories
+
+    public Activity(String description) {
+        this.description = description;
+    }
 
     public String getDescription() {
         return description;
     }
-
-    //TODO think about categories
 }

@@ -9,6 +9,12 @@ public class SimpleWorkRecord implements WorkRecord {
     protected String description;
     protected Duration subtractedTime;
 
+    public SimpleWorkRecord(LocalDateTime start, LocalDateTime end, String description) {
+        this.start = start;
+        this.end = end;
+        this.description = description;
+        subtractedTime = Duration.ZERO;
+    }
 
     @Override
     public LocalDateTime getStart() {

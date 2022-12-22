@@ -66,6 +66,7 @@ public class LocalFilesystemEngine implements Engine<ActivityMapWorkRecord, Work
     public void addRecord(LocalDate at, ActivityMapWorkRecord record) {
         WorkDayWithActivities workDay = getDay(at).orElseGet(WorkDayWithActivities::new);
         workDay.add(record);
+        putDay(at, workDay);
         //TODO figure out if putDay overwrites
     }
 
