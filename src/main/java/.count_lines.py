@@ -3,7 +3,7 @@ import json
 import sys
 import codecs
 
-excluded_words = ['cmake', '/.', '.out']
+excluded_words = ['cmake', '/.', '.out', 'target/', 'doc/']
 
 def get_sum_of_lines(path):
     files = os.listdir(path)

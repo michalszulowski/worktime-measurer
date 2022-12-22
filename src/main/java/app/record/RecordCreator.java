@@ -11,6 +11,4 @@ public interface RecordCreator {
     void addActivity(Activity activity, float wage);
     void setDescription(String description);
     ActivityMapWorkRecord getRecord();
-
-
 }
