@@ -5,8 +5,8 @@ import app.backend.engine.impl.file.Reader;
 import app.backend.engine.impl.file.SimpleReader;
 import app.backend.engine.impl.file.SimpleWriter;
 import app.backend.engine.impl.file.Writer;
-import app.backend.engine.impl.local.json.DateToPathConverterImpl;
 import app.backend.engine.impl.local.json.JsonConverter;
+import app.backend.engine.impl.local.json.impl.gson.WorkDayWithActivitiesConverter;
 import app.day.WorkDayWithActivities;
 import app.record.ActivityMapWorkRecord;
 
@@ -34,7 +34,7 @@ public class LocalFilesystemEngine implements Engine<ActivityMapWorkRecord, Work
         this.rootDir = rootDir;
         fileReader = new SimpleReader();
         fileWriter = new SimpleWriter();
-        // TODO instantiate json parser
+        workDayJsonParser = new WorkDayWithActivitiesConverter();
         dateToPathConverter = new DateToPathConverterImpl(rootDir);
     }
 

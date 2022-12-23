@@ -3,6 +3,7 @@ package app.day;
 import app.record.Activity;
 import app.record.ActivityMapWorkRecord;
 import app.util.Time;
+import com.google.gson.Gson;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -43,6 +44,21 @@ public class WorkDayWithActivities implements WorkDay<ActivityMapWorkRecord> {
     // --- TESTS ---
 
     public static void main(String[] args) {
+        test2();
+    }
+
+    private static void test1() {
+
+    }
+
+    private static void test2() {
+        WorkDayWithActivities workDayWithActivities = sampleDay();
+        Gson gson = new Gson();
+        String json = gson.toJson(workDayWithActivities);
+        System.out.println(json);
+    }
+
+    public static WorkDayWithActivities sampleDay() {
         WorkDayWithActivities workDay = new WorkDayWithActivities();
         ActivityMapWorkRecord workRecord1 = new ActivityMapWorkRecord(LocalDateTime.now(),
                 LocalDateTime.now().plusHours(1), "Zadania1");
@@ -50,9 +66,11 @@ public class WorkDayWithActivities implements WorkDay<ActivityMapWorkRecord> {
         workRecord1.addActivity(new Activity("Praca2"), 2);
         ActivityMapWorkRecord workRecord2 = new ActivityMapWorkRecord(LocalDateTime.now().plusHours(3),
                 LocalDateTime.now().plusHours(5), "Zadania2");
-        workRecord1.addActivity(new Activity("Cwiczenia x"), 1);
+        workRecord2.addActivity(new Activity("Cwiczenia x"), 1);
         workDay.add(workRecord1);
         workDay.add(workRecord2);
-
+        return workDay;
     }
+
+
 }
