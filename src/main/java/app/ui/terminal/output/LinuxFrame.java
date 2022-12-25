@@ -1,8 +1,9 @@
-package app.ui.terminal;
+package app.ui.terminal.output;
 
 import app.backend.engine.Engine;
 import app.lang.UiLangMap;
 import app.record.ActivityMapWorkRecord;
+import app.ui.terminal.RecentStatistics;
 
 public class LinuxFrame extends AbstractTputFrame {
     private Engine appEngine;

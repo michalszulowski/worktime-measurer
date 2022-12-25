@@ -18,6 +18,12 @@ public class LocalDateTimeDeAndSerializer extends GsonDeAndSerializer<LocalDateT
         return new JsonPrimitive(dateTimeFormatter.format(dateTime));
     }
 
+    @Override
+    public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+        String asText = jsonElement.getAsString();
+        return LocalDateTime.parse(asText, dateTimeFormatter);
+    }
+
     public static void main(String[] args) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeAndSerializer())
@@ -25,11 +31,5 @@ public class LocalDateTimeDeAndSerializer extends GsonDeAndSerializer<LocalDateT
         LocalDateTime dateTime = LocalDateTime.now();
         String json = gson.toJson(dateTime);
         System.out.println(json);
-    }
-
-    @Override
-    public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        String asText = jsonElement.getAsString();
-        return LocalDateTime.parse(asText, dateTimeFormatter);
     }
 }

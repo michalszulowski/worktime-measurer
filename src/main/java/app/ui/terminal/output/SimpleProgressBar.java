@@ -1,4 +1,4 @@
-package app.ui.terminal;
+package app.ui.terminal.output;
 
 public class SimpleProgressBar implements TerminalFrameElement {
     private OutStream outStream;
@@ -8,7 +8,6 @@ public class SimpleProgressBar implements TerminalFrameElement {
     private final char FULL_TILE = '█';
     private final char SPACE = ' ';
     private int closingAndStartingSeqsLen;
-    private double hoursPerTile;
     private double currentResult;
     private double resultComparingTo;
     private double dayRatio;
@@ -37,9 +36,8 @@ public class SimpleProgressBar implements TerminalFrameElement {
 
     private void printStandardBar() {
         int progressBarWidth = consoleWidth;
-        int onlyBarWidth = progressBarWidth - (STARTING_SEQ.length() + CLOSING_SEQ.length());
-        hoursPerTile = resultComparingTo / onlyBarWidth;
-        int numberOfFullTiles = Math.max((int) (onlyBarWidth * dayRatio) - STARTING_SEQ.length(), 0);
+        int onlyBarWidth = progressBarWidth - closingAndStartingSeqsLen;
+        int numberOfFullTiles = Math.max((int) (onlyBarWidth * dayRatio), 0);
         int numberOfSpaces = onlyBarWidth - numberOfFullTiles;
         outStream.print(STARTING_SEQ);
         outStream.print(generateCharSeq(FULL_TILE, numberOfFullTiles));
@@ -48,14 +46,13 @@ public class SimpleProgressBar implements TerminalFrameElement {
     }
 
     private void printSurpassingBar() {
-        int closingBarLocation = (int) (consoleWidth / dayRatio) + 1;
+        int surpassingPartLocation = (int) (consoleWidth / dayRatio) + 1;
         outStream.print(STARTING_SEQ);
-        int numberOfTilesInsideBar = closingBarLocation - closingAndStartingSeqsLen;
+        int numberOfTilesInsideBar = surpassingPartLocation - closingAndStartingSeqsLen;
         outStream.print(generateCharSeq(FULL_TILE, numberOfTilesInsideBar));
         outStream.print(CLOSING_SEQ);
-        int tilesOutOfBar = consoleWidth - (closingBarLocation );
-        outStream.print(generateCharSeq(FULL_TILE, tilesOutOfBar));
-        outStream.println("");
+        int tilesOutOfBar = consoleWidth - surpassingPartLocation;
+        outStream.println(generateCharSeq(FULL_TILE, tilesOutOfBar));
     }
 
     private String generateCharSeq(char c, int n) {
@@ -72,6 +69,7 @@ public class SimpleProgressBar implements TerminalFrameElement {
         getBarOf(0f, 4.f).print();
         getBarOf(4.f, 4.f).print();
         getBarOf(4.01f, 4.f).print();
+        getBarOf(2.f, 3.f).print();
 
     }
 

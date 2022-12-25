@@ -1,4 +1,4 @@
-package app.ui.terminal;
+package app.ui.terminal.output;
 
 public interface OutStream {
     void print(String s);

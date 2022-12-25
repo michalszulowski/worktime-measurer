@@ -1,4 +1,4 @@
-package app.ui.terminal;
+package app.ui.terminal.output;
 
 import app.ui.AppInterface;
 

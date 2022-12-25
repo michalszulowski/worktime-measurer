@@ -1,4 +1,4 @@
-package app.ui.terminal;
+package app.ui.terminal.output;
 
 public abstract class AbstractTputFrame implements TerminalFrame {
     protected int consoleWidth;

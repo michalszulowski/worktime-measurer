@@ -2,11 +2,8 @@ package app.ui.terminal;
 
 import app.backend.engine.Engine;
 import app.lang.UiLangMap;
-import app.record.ActivityMapWorkRecord;
-import app.util.Time;
-
-import java.time.LocalDate;
-import java.util.Optional;
+import app.ui.terminal.output.OutStream;
+import app.ui.terminal.output.TerminalFrameElement;
 
 public class RecentStatistics implements TerminalFrameElement {
     private OutStream outStream;
