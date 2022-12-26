@@ -39,19 +39,27 @@ public class SimpleProgressBar implements TerminalFrameElement {
         int onlyBarWidth = progressBarWidth - closingAndStartingSeqsLen;
         int numberOfFullTiles = Math.max((int) (onlyBarWidth * dayRatio), 0);
         int numberOfSpaces = onlyBarWidth - numberOfFullTiles;
+        printStandardBar(numberOfFullTiles, numberOfSpaces);
+    }
+
+    private void printSurpassingBar() {
+        int surpassingPartLocation = (int) (consoleWidth / dayRatio) + 1;
+        int numberOfTilesInsideBar = surpassingPartLocation - closingAndStartingSeqsLen;
+        int tilesOutOfBar = consoleWidth - surpassingPartLocation;
+        printSurpassingBar(numberOfTilesInsideBar, tilesOutOfBar);
+    }
+
+    private void printStandardBar(int numberOfFullTiles, int numberOfSpaces) {
         outStream.print(STARTING_SEQ);
         outStream.print(generateCharSeq(FULL_TILE, numberOfFullTiles));
         outStream.print(generateCharSeq(SPACE, numberOfSpaces));
         outStream.println(CLOSING_SEQ);
     }
 
-    private void printSurpassingBar() {
-        int surpassingPartLocation = (int) (consoleWidth / dayRatio) + 1;
+    private void printSurpassingBar(int numberOfTilesInsideBar, int tilesOutOfBar) {
         outStream.print(STARTING_SEQ);
-        int numberOfTilesInsideBar = surpassingPartLocation - closingAndStartingSeqsLen;
         outStream.print(generateCharSeq(FULL_TILE, numberOfTilesInsideBar));
         outStream.print(CLOSING_SEQ);
-        int tilesOutOfBar = consoleWidth - surpassingPartLocation;
         outStream.println(generateCharSeq(FULL_TILE, tilesOutOfBar));
     }
 
@@ -61,20 +69,5 @@ public class SimpleProgressBar implements TerminalFrameElement {
             sBuilder.append(c);
         }
         return sBuilder.toString();
-    }
-
-    public static void main(String[] args) {
-        getBarOf(5.5f, 4.f).print();
-        getBarOf(4.f, 5.5f).print();
-        getBarOf(0f, 4.f).print();
-        getBarOf(4.f, 4.f).print();
-        getBarOf(4.01f, 4.f).print();
-        getBarOf(2.f, 3.f).print();
-
-    }
-
-    private static SimpleProgressBar getBarOf(float hoursWorked, float hoursWorkedDayBefore) {
-        int consoleWidth = 20;
-        return new SimpleProgressBar(new TerminalOutStream(), consoleWidth, hoursWorked, hoursWorkedDayBefore);
     }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SimpleProgressBarTest {
-    private static StringBuilderOutStream outStream; //TODO think about some buffered class
+    private static StringBuilderOutStream outStream;
     private static SimpleProgressBar progressBar;
     private static String output;
 
