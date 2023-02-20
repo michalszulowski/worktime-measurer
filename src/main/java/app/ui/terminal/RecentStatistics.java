@@ -1,21 +1,29 @@
 package app.ui.terminal;
 
+import app.backend.engine.ActivitiesEngine;
 import app.backend.engine.Engine;
+import app.backend.statistics.StatisticsCalculator;
+import app.backend.statistics.WorkDayWithActivitiesStatisticsCalculator;
+import app.day.WorkDayWithActivities;
 import app.lang.UiLangMap;
+import app.record.ActivityMapWorkRecord;
 import app.ui.terminal.output.OutStream;
 import app.ui.terminal.output.TerminalFrameElement;
+import app.util.Time;
 
-public class RecentStatistics implements TerminalFrameElement {
-    private OutStream outStream;
-    private UiLangMap langMap;
-    private Engine appEngine;
-    private double lastDayWorkTime; //TODO rethink this field
+import java.time.LocalDate;
+import java.util.Optional;
 
-    public RecentStatistics(OutStream outStream, UiLangMap langMap, Engine appEngine, double lastDayWorkTime) {
-        this.outStream = outStream;
-        this.langMap = langMap;
+public class RecentStatistics extends BasicTerminalFrameElement {
+    private LocalDate day;
+    private ActivitiesEngine appEngine;
+    private StatisticsCalculator statisticsCalculator;
+
+    public RecentStatistics(OutStream outStream, UiLangMap langMap, LocalDate day, ActivitiesEngine appEngine) {
+        super(outStream, langMap);
+        this.day = day;
         this.appEngine = appEngine;
-        this.lastDayWorkTime = lastDayWorkTime;
+        statisticsCalculator = new WorkDayWithActivitiesStatisticsCalculator(appEngine);
     }
 
     @Override
@@ -27,33 +35,26 @@ public class RecentStatistics implements TerminalFrameElement {
     }
 
     private void printThatDayWorkTime() {
-        outStream.println(langMap.getText("Today worked") + ": " + lastDayWorkTime);
+        LocalDate today = day;
+        double todaysWorkTime = statisticsCalculator.getTotalHoursWorkedIn(today, today);
+        outStream.println(langMap.getText("Today worked") + ": " + todaysWorkTime);
     }
 
     private void printDayBeforeWorkTime() {
-        /*
-        LocalDate dayBefore = LocalDate.now().minusDays(1);
-        Optional<ActivityMapWorkRecord> recordOfDayBefore = appEngine.getRecord(dayBefore);
-        String dayBeforeWorkTime = recordOfDayBefore.isEmpty() ?
-                "-" : Time.getHours(recordOfDayBefore.get().calculateTotalTime()) + "";
+        LocalDate dayBefore = day.minusDays(1);
+        double dayBeforeWorkTime = statisticsCalculator.getAverageHoursWorkedIn(dayBefore, dayBefore);
         outStream.println(langMap.getText("Yesterday worked") + ": " + dayBeforeWorkTime);
-         */
     }
 
     private void printLastWeekAverage() {
-        /*
-        Optional<Float> lastWeekAverage = appEngine.getAverageHoursWorkedInLast(7);
-        String lastWeekAverageWorkTime = lastWeekAverage.isEmpty() ? "-" : lastWeekAverage.get() + "";
+        LocalDate startOfTheWeek = day.minusDays(7);
+        double lastWeekAverageWorkTime = statisticsCalculator.getAverageHoursWorkedIn(startOfTheWeek, day);
         outStream.println(langMap.getText("Average work time in last week") + ": " + lastWeekAverageWorkTime);
-
-         */
     }
 
     private void printLastMonthAverage() {
-        /*
-        Optional<Float> lastMonthAverage = appEngine.getAverageHoursWorkedInLast(30);
-        String lastMonthAverageWorkTime = lastMonthAverage.isEmpty() ? "-" : lastMonthAverage.get() + "";
+        LocalDate startOfTheMonth = day.minusDays(30);
+        double lastMonthAverageWorkTime = statisticsCalculator.getAverageHoursWorkedIn(startOfTheMonth, day);
         outStream.println(langMap.getText("Average work time in last month") + ": " + lastMonthAverageWorkTime);
-         */
     }
 }

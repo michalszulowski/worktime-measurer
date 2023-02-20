@@ -4,13 +4,14 @@ import app.record.Activity;
 import app.record.ActivityMapWorkRecord;
 import app.util.Time;
 import com.google.gson.Gson;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
+import java.util.*;
 
+@EqualsAndHashCode
 public class WorkDayWithActivities implements WorkDay<ActivityMapWorkRecord> {
     private List<ActivityMapWorkRecord> records;
 
@@ -33,6 +34,9 @@ public class WorkDayWithActivities implements WorkDay<ActivityMapWorkRecord> {
         records.remove(record);
     }
 
+    /**
+     * @return time as hours
+     */
     @Override
     public double getTotalTime() {
         return records.stream()
@@ -47,25 +51,24 @@ public class WorkDayWithActivities implements WorkDay<ActivityMapWorkRecord> {
         test2();
     }
 
-    private static void test1() {
-
-    }
+    //TODO redo tests
 
     private static void test2() {
-        WorkDayWithActivities workDayWithActivities = sampleDay();
+        WorkDayWithActivities workDayWithActivities = generateSampleDay();
         Gson gson = new Gson();
         String json = gson.toJson(workDayWithActivities);
         System.out.println(json);
     }
 
-    public static WorkDayWithActivities sampleDay() {
+    public static WorkDayWithActivities generateSampleDay() {
+        LocalDateTime referenceDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         WorkDayWithActivities workDay = new WorkDayWithActivities();
-        ActivityMapWorkRecord workRecord1 = new ActivityMapWorkRecord(LocalDateTime.now(),
-                LocalDateTime.now().plusHours(1), "Zadania1");
+        ActivityMapWorkRecord workRecord1 = new ActivityMapWorkRecord(referenceDateTime,
+                referenceDateTime.plusHours(1), "Zadania1");
         workRecord1.addActivity(new Activity("Praca1"), 1);
         workRecord1.addActivity(new Activity("Praca2"), 2);
-        ActivityMapWorkRecord workRecord2 = new ActivityMapWorkRecord(LocalDateTime.now().plusHours(3),
-                LocalDateTime.now().plusHours(5), "Zadania2");
+        ActivityMapWorkRecord workRecord2 = new ActivityMapWorkRecord(referenceDateTime.plusHours(3),
+                referenceDateTime.plusHours(5), "Zadania2");
         workRecord2.addActivity(new Activity("Cwiczenia x"), 1);
         workDay.add(workRecord1);
         workDay.add(workRecord2);

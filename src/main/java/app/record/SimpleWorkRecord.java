@@ -1,8 +1,11 @@
 package app.record;
 
+import lombok.EqualsAndHashCode;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode
 public class SimpleWorkRecord implements WorkRecord {
     protected LocalDateTime start;
     protected LocalDateTime end;

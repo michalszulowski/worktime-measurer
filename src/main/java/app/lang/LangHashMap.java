@@ -5,7 +5,6 @@ import java.util.HashMap;
 public class LangHashMap implements UiLangMap {
     private HashMap<String, String> hashMap;
 
-
     //TODO add loading
     public LangHashMap() {
         hashMap = new HashMap<>();

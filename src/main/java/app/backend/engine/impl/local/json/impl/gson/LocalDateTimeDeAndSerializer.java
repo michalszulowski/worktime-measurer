@@ -24,12 +24,4 @@ public class LocalDateTimeDeAndSerializer extends GsonDeAndSerializer<LocalDateT
         return LocalDateTime.parse(asText, dateTimeFormatter);
     }
 
-    public static void main(String[] args) {
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeAndSerializer())
-                .create();
-        LocalDateTime dateTime = LocalDateTime.now();
-        String json = gson.toJson(dateTime);
-        System.out.println(json);
-    }
 }

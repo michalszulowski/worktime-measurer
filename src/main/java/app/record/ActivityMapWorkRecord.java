@@ -1,19 +1,23 @@
 package app.record;
 
-import com.google.gson.Gson;
+import lombok.EqualsAndHashCode;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 public class ActivityMapWorkRecord extends SimpleWorkRecord {
-    private ActivityMap activities;
+    private final ActivityMap activityMap;
 
     public ActivityMapWorkRecord(LocalDateTime start, LocalDateTime end, String description) {
         super(start, end, description);
-        activities = new ActivityMap();
+        activityMap = new ActivityMap();
     }
 
     public void addActivity(Activity activity, float wage) {
-        activities.put(activity, wage);
+        activityMap.put(activity, wage);
+    }
+
+    public ActivityMap getActivityMap() {
+        return activityMap;
     }
 }
