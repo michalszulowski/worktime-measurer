@@ -12,7 +12,7 @@ public class SimpleProgressBar implements TerminalFrameElement {
     private double resultComparingTo;
     private double dayRatio;
 
-    public SimpleProgressBar(OutStream outStream, int consoleWidth, float currentResult, float resultComparingTo) {
+    public SimpleProgressBar(OutStream outStream, int consoleWidth, double currentResult, double resultComparingTo) {
         this.outStream = outStream;
         this.consoleWidth = consoleWidth;
         this.currentResult = currentResult;

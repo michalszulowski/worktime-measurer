@@ -7,6 +7,7 @@ import app.backend.statistics.WorkDayWithActivitiesStatisticsCalculator;
 import app.day.WorkDayWithActivities;
 import app.lang.UiLangMap;
 import app.record.ActivityMapWorkRecord;
+import app.ui.terminal.output.AppFrame;
 import app.ui.terminal.output.OutStream;
 import app.ui.terminal.output.TerminalFrameElement;
 import app.util.Time;
@@ -16,14 +17,12 @@ import java.util.Optional;
 
 public class RecentStatistics extends BasicTerminalFrameElement {
     private LocalDate day;
-    private ActivitiesEngine appEngine;
     private StatisticsCalculator statisticsCalculator;
 
-    public RecentStatistics(OutStream outStream, UiLangMap langMap, LocalDate day, ActivitiesEngine appEngine) {
-        super(outStream, langMap);
+    public RecentStatistics(AppFrame parent, LocalDate day) {
+        super(parent);
         this.day = day;
-        this.appEngine = appEngine;
-        statisticsCalculator = new WorkDayWithActivitiesStatisticsCalculator(appEngine);
+        statisticsCalculator = parent.getStatisticsCalculator();
     }
 
     @Override

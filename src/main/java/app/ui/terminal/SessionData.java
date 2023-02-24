@@ -3,7 +3,9 @@ package app.ui.terminal;
 import app.lang.UiLangMap;
 import app.record.Activity;
 import app.record.ActivityMapWorkRecord;
+import app.ui.terminal.output.AppFrame;
 import app.ui.terminal.output.OutStream;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -12,17 +14,34 @@ public class SessionData extends BasicTerminalFrameElement {
     private ActivityMapWorkRecord workRecord;
     private LocalDateTime time;
 
-    public SessionData(OutStream outStream, UiLangMap langMap, ActivityMapWorkRecord workRecord, LocalDateTime time) {
-        super(outStream, langMap);
+    public SessionData(AppFrame parent, @Nullable ActivityMapWorkRecord workRecord, LocalDateTime time) {
+        super(parent);
         this.workRecord = workRecord;
         this.time = time;
     }
 
     @Override
     public void print() {
-        outStream.println(langMap.getText("CURRENT SESSION"));
-        printSessionTime();
-        printActivities();
+        printTime();
+        outStream.println();
+        outStream.println(langMap.getText("CURRENT SESSION:"));
+        if (workRecord != null) {
+            printSessionTime();
+            printActivities();
+        } else {
+            outStream.println(langMap.getText("No active record."));
+        }
+    }
+
+    private void printTime() {
+        int year = time.getYear();
+        int month = time.getMonthValue();
+        int day = time.getDayOfMonth();
+        int hour = time.getHour();
+        int minute = time.getMinute();
+        int second = time.getSecond();
+        String formattedTime = String.format("%04d:%02d:%02d %02d:%02d:%02d", year, month, day, hour, minute, second);
+        outStream.println(formattedTime);
     }
 
     private void printSessionTime() {
@@ -32,6 +51,7 @@ public class SessionData extends BasicTerminalFrameElement {
         long seconds = sessionDuration.toSeconds();
         String formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
         outStream.println(langMap.getText("Time") + ": " + formattedTime);
+        outStream.println();
     }
 
     private void printActivities() {
@@ -42,6 +62,6 @@ public class SessionData extends BasicTerminalFrameElement {
     }
 
     private void printActivity(Activity activity) {
-        outStream.println(activity.getDescription());
+        outStream.println("* " + activity.getDescription());
     }
 }

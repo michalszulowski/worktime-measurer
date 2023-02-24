@@ -5,4 +5,7 @@ public interface OutStream {
     default void println(String s) {
         print(s + "\n");
     }
+    default void println() {
+        println("");
+    }
 }
