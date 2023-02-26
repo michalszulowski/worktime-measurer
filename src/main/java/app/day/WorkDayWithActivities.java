@@ -51,8 +51,6 @@ public class WorkDayWithActivities implements WorkDay<ActivityMapWorkRecord> {
         test2();
     }
 
-    //TODO redo tests
-
     private static void test2() {
         WorkDayWithActivities workDayWithActivities = generateSampleDay();
         Gson gson = new Gson();

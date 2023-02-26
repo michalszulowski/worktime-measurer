@@ -21,7 +21,7 @@ public class SimpleReader implements Reader {
         try (BufferedReader bufferedReader = Files.newBufferedReader(path)) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                contentBuilder.append(line); //TODO figure out if add new line
+                contentBuilder.append(line);
             }
         }
         return contentBuilder.toString();
