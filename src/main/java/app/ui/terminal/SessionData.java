@@ -46,9 +46,9 @@ public class SessionData extends BasicTerminalFrameElement {
 
     private void printSessionTime() {
         Duration sessionDuration = Duration.between(workRecord.getStart(), time);
-        long hours = sessionDuration.toHours();
-        long minutes = sessionDuration.toMinutes();
-        long seconds = sessionDuration.toSeconds();
+        long hours = sessionDuration.toHoursPart();
+        long minutes = sessionDuration.toMinutesPart();
+        long seconds = sessionDuration.toSecondsPart();
         String formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
         outStream.println(langMap.getText("Time") + ": " + formattedTime);
         outStream.println();
