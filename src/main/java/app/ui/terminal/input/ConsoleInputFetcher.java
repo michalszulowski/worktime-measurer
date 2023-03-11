@@ -1,9 +1,6 @@
 package app.ui.terminal.input;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UncheckedIOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +10,13 @@ public class ConsoleInputFetcher extends ContinuousFetcher {
     private BufferedReader lineReader;
 
     public ConsoleInputFetcher() {
+        this(System.in);
+    }
+
+    public ConsoleInputFetcher(InputStream inputStream) {
         running = true;
         observers = new ArrayList<>();
-        lineReader = new BufferedReader(new InputStreamReader(System.in));
+        lineReader = new BufferedReader(new InputStreamReader(inputStream));
     }
 
     @Override
