@@ -1,9 +1,9 @@
 package app.backend.concurrency.state;
 
-import app.backend.concurrency.AbstractConcurrentProcess;
+import app.backend.concurrency.AbstractControllableProcess;
 
 public class PausedState extends StateWithOwner {
-    public PausedState(AbstractConcurrentProcess owner) {
+    public PausedState(AbstractControllableProcess owner) {
         super(owner, "PAUSED");
     }
 

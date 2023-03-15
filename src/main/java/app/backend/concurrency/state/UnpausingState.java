@@ -1,10 +1,10 @@
 package app.backend.concurrency.state;
 
-import app.backend.concurrency.AbstractConcurrentProcess;
+import app.backend.concurrency.AbstractControllableProcess;
 
 public class UnpausingState extends StateWithOwner {
 
-    public UnpausingState(AbstractConcurrentProcess owner) {
+    public UnpausingState(AbstractControllableProcess owner) {
         super(owner, "UNPAUSING");
     }
 

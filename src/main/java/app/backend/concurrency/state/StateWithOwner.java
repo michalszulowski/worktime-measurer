@@ -1,12 +1,12 @@
 package app.backend.concurrency.state;
 
-import app.backend.concurrency.AbstractConcurrentProcess;
+import app.backend.concurrency.ControllableProcess;
 
 public abstract class StateWithOwner implements ProcessState {
-    protected final AbstractConcurrentProcess owner;
+    protected final ControllableProcess owner;
     private final String name;
 
-    public StateWithOwner(AbstractConcurrentProcess owner, String name) {
+    public StateWithOwner(ControllableProcess owner, String name) {
         this.owner = owner;
         this.name = name;
     }

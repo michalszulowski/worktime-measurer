@@ -1,12 +1,6 @@
 package app.backend.concurrency;
 
-import app.backend.concurrency.state.ProcessState;
-
-/**
- * Represents runnable thread.
- */
 public interface ConcurrentProcess {
-    void run();
+    void start();
     ExecutionController getExecutionController();
-    ProcessState getState();
 }
