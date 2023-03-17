@@ -2,7 +2,6 @@ package app.backend.concurrency;
 
 import java.util.Optional;
 
-//TODO write tests
 public class SynchronizedValueKeeper<T> implements ValueKeeper<T> {
     private T value;
 

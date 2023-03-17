@@ -1,49 +1,20 @@
 package app.backend.concurrency;
 
-import app.backend.concurrency.state.ProcessState;
-
-//TODO maybe break into two classes, one with only synchronized functionalities
-public abstract class AbstractControllableProcess implements ControllableProcess {
+public abstract class AbstractControllableProcess implements ConcurrentProcess {
     private final Thread runThread;
-    private boolean running;
-    private volatile ProcessState currentState;
-    private final SynchronizedValueKeeper<ProcessState> setStateKeeper;
-    private final ExecutionController executionController;
+    private final String name;
+    private boolean running; //TODO maybe do volatile
 
-    public AbstractControllableProcess() {
-        runThread = new Thread(this::startMainLoop);
-        //TODO set name and exception handler
+    public AbstractControllableProcess(String name) {
+        runThread = constructThread(name);
+        this.name = name;
         running = false;
-        setStateKeeper = new SynchronizedValueKeeper<>();
-        executionController = null; //TODO implement
     }
 
     @Override
     public void start() {
         running = true;
         runThread.start();
-    }
-
-    //TODO think about synchronizing
-    @Override
-    public void checkForPendingControlActions() {
-        setStateKeeper.pull()
-                .ifPresent(this::activateNewState);
-    }
-
-    @Override
-    public ProcessState getState() {
-        return currentState;
-    }
-
-    @Override
-    public void setNewState(ProcessState state) {
-        setStateKeeper.set(state);
-    }
-
-    @Override
-    public ExecutionController getExecutionController() {
-        return executionController;
     }
 
     @Override
@@ -53,16 +24,21 @@ public abstract class AbstractControllableProcess implements ControllableProcess
 
     protected abstract void performMainLoopBody();
 
-    //TODO think about synchronizing this
-    private void activateNewState(ProcessState state) {
-        currentState = state;
-        state.executeOnActivation();
+    private Thread constructThread(String name) {
+        Thread thread = new Thread(this::startMainLoop);
+        thread.setName(name);
+        //thread.setUncaughtExceptionHandler(); TODO implement
+        return thread;
     }
 
     private void startMainLoop() {
         while (running) {
-            performMainLoopBody();
-            checkForPendingControlActions();
+            try {
+                performMainLoopBody();
+                checkForPendingControlActions();
+            } catch (ProcessKilledException ex) {
+                running = false;
+            }
         }
     }
 }

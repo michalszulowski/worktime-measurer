@@ -21,7 +21,7 @@ class ConsoleInputFetcherTest {
     }
 
     private void whenFetching() {
-        inputFetcher.
+        //inputFetcher.
     }
 
     private void thenReadInputShouldBe(List<String> expectedReadInput) {
