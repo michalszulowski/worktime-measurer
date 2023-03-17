@@ -1,7 +1,6 @@
 package app.backend.concurrency.state;
 
-import app.backend.concurrency.AbstractControllableProcess;
-import app.backend.concurrency.ConcurrentProcess;
+import app.backend.concurrency.process.ConcurrentProcess;
 
 public class RunningState extends StateWithOwner {
 

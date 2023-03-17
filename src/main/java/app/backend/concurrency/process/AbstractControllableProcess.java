@@ -1,9 +1,9 @@
-package app.backend.concurrency;
+package app.backend.concurrency.process;
 
 public abstract class AbstractControllableProcess implements ConcurrentProcess {
     private final Thread runThread;
     private final String name;
-    private boolean running; //TODO maybe do volatile
+    private boolean running;
 
     public AbstractControllableProcess(String name) {
         runThread = constructThread(name);

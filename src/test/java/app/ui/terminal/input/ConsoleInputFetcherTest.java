@@ -9,6 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//TODO finish
 class ConsoleInputFetcherTest {
     private static ConsoleInputFetcher inputFetcher;
     private static SavingObserver inputObserver;

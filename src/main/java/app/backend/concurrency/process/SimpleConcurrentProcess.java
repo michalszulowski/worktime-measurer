@@ -1,9 +1,12 @@
-package app.backend.concurrency;
+package app.backend.concurrency.process;
 
-public abstract class SimpleControllableProcess extends ConcurrentControllableProcess {
+import app.backend.concurrency.ExceptionHandler;
+import app.backend.concurrency.KillOnInterruptHandler;
+
+public abstract class SimpleConcurrentProcess extends AbstractConcurrentProcess {
     private final ExceptionHandler<InterruptedException> interruptedExceptionExceptionHandler;
 
-    public SimpleControllableProcess(String name) {
+    public SimpleConcurrentProcess(String name) {
         super(name);
         interruptedExceptionExceptionHandler = new KillOnInterruptHandler(this);
     }

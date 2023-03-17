@@ -13,6 +13,16 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+            </plugin>
+        </plugins>
+    </build>
+
     <repositories>
         <repository>
             <id>jitpack.io</id>
@@ -24,7 +34,7 @@
         <dependency>
             <groupId>com.github.michalszulowski</groupId>
             <artifactId>text-command-parser</artifactId>
-            <version>de20855</version>
+            <version>324125c</version>
         </dependency>
 
         <dependency>

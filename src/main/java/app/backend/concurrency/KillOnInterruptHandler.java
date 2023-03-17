@@ -1,5 +1,7 @@
 package app.backend.concurrency;
 
+import app.backend.concurrency.process.ConcurrentProcess;
+
 public class KillOnInterruptHandler implements ExceptionHandler<InterruptedException> {
     private final ConcurrentProcess owner;
 

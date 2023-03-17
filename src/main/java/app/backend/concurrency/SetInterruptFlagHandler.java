@@ -6,6 +6,8 @@ public class SetInterruptFlagHandler implements ExceptionHandler<InterruptedExce
         Thread.currentThread().interrupt();
     }
 
+
+    //TODO think about deleting
     public static void main(String[] args) {
         ExceptionHandler<InterruptedException> handlerWithPrinting = new SetInterruptFlagHandler() {
             @Override

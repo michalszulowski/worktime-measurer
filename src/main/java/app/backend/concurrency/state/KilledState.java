@@ -1,8 +1,7 @@
 package app.backend.concurrency.state;
 
-import app.backend.concurrency.AbstractControllableProcess;
-import app.backend.concurrency.ConcurrentProcess;
-import app.backend.concurrency.ProcessKilledException;
+import app.backend.concurrency.process.ConcurrentProcess;
+import app.backend.concurrency.process.ProcessKilledException;
 
 public class KilledState extends StateWithOwner {
     public KilledState(ConcurrentProcess owner) {
