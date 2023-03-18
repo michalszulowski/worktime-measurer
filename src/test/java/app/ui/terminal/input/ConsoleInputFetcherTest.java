@@ -14,6 +14,8 @@ class ConsoleInputFetcherTest {
     private static ConsoleInputFetcher inputFetcher;
     private static SavingObserver inputObserver;
 
+
+
     private void givenInput(String input) {
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         inputFetcher = new ConsoleInputFetcher(inputStream);

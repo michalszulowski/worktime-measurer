@@ -1,10 +1,12 @@
 package app.ui.terminal.input;
 
+import app.backend.concurrency.process.SimpleConcurrentProcess;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsoleInputFetcher extends ContinuousFetcher {
+public class ConsoleInputFetcher extends SimpleConcurrentProcess implements InputFetcher {
     private boolean running;
     private List<InputObserver> observers;
     private BufferedReader lineReader;
@@ -14,17 +16,16 @@ public class ConsoleInputFetcher extends ContinuousFetcher {
     }
 
     public ConsoleInputFetcher(InputStream inputStream) {
+        super("INPUT_FETCHER");
         running = true;
         observers = new ArrayList<>();
         lineReader = new BufferedReader(new InputStreamReader(inputStream));
     }
 
     @Override
-    public void run() {
-        while (running) {
-            String line = waitForLineAndRead();
-            notifyObservers(line);
-        }
+    protected void performMainLoopBody() {
+        String line = waitForLineAndRead();
+        notifyObservers(line);
     }
 
     @Override
@@ -45,10 +46,10 @@ public class ConsoleInputFetcher extends ContinuousFetcher {
                 observer -> observer.typed(line));
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ConsoleInputFetcher fetcher = new ConsoleInputFetcher();
         fetcher.addObserver(new CountingObserver());
-        fetcher.run();
+        fetcher.start();
     }
 
     private static class CountingObserver implements InputObserver {

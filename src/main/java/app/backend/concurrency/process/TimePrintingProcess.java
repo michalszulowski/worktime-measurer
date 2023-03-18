@@ -1,12 +1,5 @@
 package app.backend.concurrency.process;
 
-import app.ui.terminal.input.ConsoleInputFetcher;
-import app.ui.terminal.input.ContinuousFetcher;
-import app.ui.terminal.input.InputObserver;
-import command.Command;
-import command.factory.CommandFactory;
-import command.factory.DictionaryCommandFactory;
-
 import java.io.*;
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -57,6 +50,7 @@ public class TimePrintingProcess extends SimpleConcurrentProcess {
 
     private void spawnNewTerminalAndTailToFile(String tempFilePath) {
         try {
+            //TODO save requirement
             String command = String.format("gnome-terminal -- tail %s -f", tempFilePath);
             Runtime.getRuntime().exec(command);
         } catch (IOException e) {
@@ -69,6 +63,7 @@ public class TimePrintingProcess extends SimpleConcurrentProcess {
         output.println("It is " + iteration + " iteration. Time: " + currentTime);
     }
     private void waitBeforeNextIteration() {
+        //TODO maybe move whole sleeping to process method
         try {
             Thread.sleep(WAIT_TIME);
         } catch (InterruptedException ex) {
