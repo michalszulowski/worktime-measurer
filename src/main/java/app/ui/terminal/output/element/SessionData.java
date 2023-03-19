@@ -1,17 +1,12 @@
-package app.ui.terminal;
+package app.ui.terminal.output.element;
 
-import app.lang.UiLangMap;
 import app.record.Activity;
 import app.record.ActivityMapWorkRecord;
-import app.ui.terminal.output.AppFrame;
-import app.ui.terminal.output.OutStream;
-import command.ArgsCommand;
-import command.Command;
+import app.ui.terminal.output.frame.AppFrame;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class SessionData extends BasicTerminalFrameElement {
     private ActivityMapWorkRecord workRecord;

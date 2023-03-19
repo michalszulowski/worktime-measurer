@@ -10,8 +10,12 @@ public class ProcessController implements ExecutionController {
     }
 
     @Override
-    public void run() {
-        setNewState(new RunningState(process));
+    public void start() {
+        if (!process.isRunning()) {
+            process.start();
+        } else {
+            setNewState(new RunningState(process));
+        }
     }
 
     @Override

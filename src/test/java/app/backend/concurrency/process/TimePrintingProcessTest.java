@@ -19,7 +19,7 @@ class TimePrintingProcessTest {
         CommandFactory commandFactory = buildCommandFactory(timePrinter, inputFetcher);
         InputObserver inputObserver = new CommandOnInputObserver(commandFactory);
         inputFetcher.addObserver(inputObserver);
-        timePrinter.start();
+        timePrinter.getExecutionController().start();
         inputFetcher.start();
     }
 
@@ -43,6 +43,7 @@ class TimePrintingProcessTest {
 
     private static CommandFactory buildCommandFactory(ConcurrentProcess process, ConsoleInputFetcher inputFetcher) {
         var commandFactory = new DictionaryCommandFactory();
+        commandFactory.addCommand("start", args -> (() -> process.getExecutionController().start()));
         commandFactory.addCommand("pause", args -> (() -> process.getExecutionController().pause()));
         commandFactory.addCommand("unpause", args -> (() -> process.getExecutionController().unpause()));
         commandFactory.addCommand("kill", args -> (() -> {

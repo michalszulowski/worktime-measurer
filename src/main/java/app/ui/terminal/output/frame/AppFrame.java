@@ -1,9 +1,11 @@
-package app.ui.terminal.output;
+package app.ui.terminal.output.frame;
 
 import app.backend.engine.ActivitiesEngine;
 import app.backend.statistics.StatisticsCalculator;
 import app.backend.statistics.WorkDayWithActivitiesStatisticsCalculator;
 import app.lang.UiLangMap;
+import app.ui.terminal.output.OutStream;
+import app.ui.terminal.output.TerminalOutStream;
 
 public abstract class AppFrame extends AbstractTerminalFrame {
     protected ActivitiesEngine appEngine;

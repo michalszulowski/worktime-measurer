@@ -1,19 +1,9 @@
-package app.ui.terminal;
+package app.ui.terminal.output.element;
 
-import app.backend.engine.ActivitiesEngine;
-import app.backend.engine.Engine;
 import app.backend.statistics.StatisticsCalculator;
-import app.backend.statistics.WorkDayWithActivitiesStatisticsCalculator;
-import app.day.WorkDayWithActivities;
-import app.lang.UiLangMap;
-import app.record.ActivityMapWorkRecord;
-import app.ui.terminal.output.AppFrame;
-import app.ui.terminal.output.OutStream;
-import app.ui.terminal.output.TerminalFrameElement;
-import app.util.Time;
+import app.ui.terminal.output.frame.AppFrame;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class RecentStatistics extends BasicTerminalFrameElement {
     private LocalDate day;

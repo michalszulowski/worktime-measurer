@@ -1,4 +1,4 @@
-package app.ui.terminal.output;
+package app.ui.terminal.output.frame;
 
 import app.backend.engine.ActivitiesEngine;
 import app.backend.engine.impl.local.LocalFilesystemEngine;
@@ -6,9 +6,10 @@ import app.day.WorkDayWithActivities;
 import app.lang.DirectLangMap;
 import app.lang.UiLangMap;
 import app.record.ActivityMapWorkRecord;
-import app.ui.terminal.DayProgressBar;
-import app.ui.terminal.RecentStatistics;
-import app.ui.terminal.SessionData;
+import app.ui.terminal.output.element.DayProgressBar;
+import app.ui.terminal.output.element.RecentStatistics;
+import app.ui.terminal.output.element.SessionData;
+import app.ui.terminal.output.element.TerminalFrameElement;
 
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -16,13 +17,16 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Optional;
 
-public class LinuxFrame extends AppFrame {
+public class CurrentDayFrame extends AppFrame {
     private TerminalFrameElement sessionData;
     private TerminalFrameElement recentStatistics;
     private TerminalFrameElement progressBar;
+    private LocalDateTime time;
 
-    public LinuxFrame(int consoleWidth, int consoleHeight, ActivitiesEngine appEngine, UiLangMap langMap) {
+    public CurrentDayFrame(int consoleWidth, int consoleHeight, ActivitiesEngine appEngine, UiLangMap langMap,
+                           LocalDateTime time) {
         super(consoleWidth, consoleHeight, appEngine, langMap);
+        this.time = time;
         initFrameElements();
     }
 
@@ -34,11 +38,10 @@ public class LinuxFrame extends AppFrame {
     }
 
     private void initFrameElements() {
-        LocalDateTime time = LocalDateTime.of(2023, 2, 22, 11, 30);
         Optional<ActivityMapWorkRecord> currentRecord = getActiveWorkRecord(time);
         sessionData = new SessionData(this, currentRecord.orElse(null), time);
-        recentStatistics = new RecentStatistics(this, LocalDate.of(2023, 2, 21));
-        progressBar = new DayProgressBar(this, LocalDate.of(2023, 2, 21));
+        recentStatistics = new RecentStatistics(this, time.toLocalDate());
+        progressBar = new DayProgressBar(this, time.toLocalDate());
     }
 
     private void printCurrentSessionData() {
@@ -69,11 +72,14 @@ public class LinuxFrame extends AppFrame {
         return result;
     }
 
+    //TODO remove
     public static void main(String[] args) {
+        /*
         String documentsPath = System.getProperty("user.home") + "/Documents/work-records/";
         ActivitiesEngine engine = new LocalFilesystemEngine(Paths.get(documentsPath));
-        LinuxFrame frame = new LinuxFrame(40, 80, engine, new DirectLangMap());
+        CurrentDayFrame frame = new CurrentDayFrame(40, 80, engine, new DirectLangMap(), time);
         frame.print();
+         */
     }
 
 }

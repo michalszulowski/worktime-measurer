@@ -1,6 +1,6 @@
 package app.backend.concurrency.process;
 
 public interface ControllableProcess {
-    void start();
+    void start(); //TODO think about removing
     ExecutionController getExecutionController();
 }

@@ -10,6 +10,7 @@ public class ConsoleInputFetcher extends SimpleConcurrentProcess implements Inpu
     private boolean running;
     private List<InputObserver> observers;
     private BufferedReader lineReader;
+    private InputStream inputStream;
 
     public ConsoleInputFetcher() {
         this(System.in);
@@ -17,9 +18,10 @@ public class ConsoleInputFetcher extends SimpleConcurrentProcess implements Inpu
 
     public ConsoleInputFetcher(InputStream inputStream) {
         super("INPUT_FETCHER");
+        this.inputStream = inputStream;
         running = true;
         observers = new ArrayList<>();
-        lineReader = new BufferedReader(new InputStreamReader(inputStream));
+        lineReader = new BufferedReader(new InputStreamReader(this.inputStream));
     }
 
     @Override
@@ -46,7 +48,21 @@ public class ConsoleInputFetcher extends SimpleConcurrentProcess implements Inpu
                 observer -> observer.typed(line));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException, IOException {
+        testInterrupting();
+    }
+
+    private static void testInterrupting() throws InterruptedException, IOException {
+        ConsoleInputFetcher fetcher = new ConsoleInputFetcher();
+        fetcher.addObserver(new CountingObserver());
+        fetcher.start();
+        Thread.sleep(500);
+        fetcher.getExecutionController().kill();
+        fetcher.inputStream.read();
+        System.out.println("Closed stream");
+    }
+
+    private static void testSimpleObserver() {
         ConsoleInputFetcher fetcher = new ConsoleInputFetcher();
         fetcher.addObserver(new CountingObserver());
         fetcher.start();

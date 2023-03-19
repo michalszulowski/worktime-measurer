@@ -1,4 +1,6 @@
-package app.ui.terminal.output;
+package app.ui.terminal.output.element;
+
+import app.ui.terminal.output.OutStream;
 
 public class SimpleProgressBar implements TerminalFrameElement {
     private OutStream outStream;

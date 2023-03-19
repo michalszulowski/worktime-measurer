@@ -43,6 +43,14 @@ public abstract class AbstractConcurrentProcess extends AbstractControllableProc
         return executionController;
     }
 
+    protected void sleep(long time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException ex) {
+            getInterruptedExceptionHandler().handle(ex);
+        }
+    }
+
     private void activateNewState(ProcessState state) {
         currentState = state;
         state.executeOnActivation();

@@ -1,7 +1,7 @@
 package app.ui.terminal;
 
-import app.ui.terminal.output.SimpleProgressBar;
-import app.ui.terminal.output.StringBuilderOutStream;
+import app.ui.terminal.output.OutStream;
+import app.ui.terminal.output.element.SimpleProgressBar;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -57,5 +57,26 @@ class SimpleProgressBarTest {
 
     private void thenOutputShouldBe(String expected) {
         assertEquals(expected, output);
+    }
+
+    private static class StringBuilderOutStream implements OutStream {
+        private StringBuilder sBuilder;
+
+        public StringBuilderOutStream() {
+            sBuilder = new StringBuilder();
+        }
+
+        @Override
+        public void print(String s) {
+            sBuilder.append(s);
+        }
+
+        public String getContent() {
+            return sBuilder.toString();
+        }
+
+        public void clear() {
+            sBuilder = new StringBuilder();
+        }
     }
 }

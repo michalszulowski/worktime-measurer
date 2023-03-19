@@ -21,7 +21,7 @@ public class TimePrintingProcess extends SimpleConcurrentProcess {
     protected void performMainLoopBody() {
         printCurrentTime();
         iteration++;
-        waitBeforeNextIteration();
+        sleep(WAIT_TIME);
     }
 
     private void createTempFileAndInitOutput() {
@@ -61,13 +61,5 @@ public class TimePrintingProcess extends SimpleConcurrentProcess {
     private void printCurrentTime() {
         LocalTime currentTime = LocalTime.now();
         output.println("It is " + iteration + " iteration. Time: " + currentTime);
-    }
-    private void waitBeforeNextIteration() {
-        //TODO maybe move whole sleeping to process method
-        try {
-            Thread.sleep(WAIT_TIME);
-        } catch (InterruptedException ex) {
-            getInterruptedExceptionHandler().handle(ex);
-        }
     }
 }

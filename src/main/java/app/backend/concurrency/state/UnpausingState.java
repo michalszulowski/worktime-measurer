@@ -10,6 +10,6 @@ public class UnpausingState extends StateWithOwner {
 
     @Override
     public void executeOnActivation() {
-        owner.getExecutionController().run();
+        owner.getExecutionController().start();
     }
 }

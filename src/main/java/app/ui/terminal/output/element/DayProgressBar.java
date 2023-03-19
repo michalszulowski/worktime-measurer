@@ -1,10 +1,7 @@
-package app.ui.terminal;
+package app.ui.terminal.output.element;
 
 import app.backend.statistics.StatisticsCalculator;
-import app.lang.UiLangMap;
-import app.ui.terminal.output.AppFrame;
-import app.ui.terminal.output.OutStream;
-import app.ui.terminal.output.SimpleProgressBar;
+import app.ui.terminal.output.frame.AppFrame;
 
 import java.time.LocalDate;
 

@@ -1,9 +1,8 @@
-package app.ui.terminal;
+package app.ui.terminal.output.element;
 
 import app.lang.UiLangMap;
-import app.ui.terminal.output.AppFrame;
+import app.ui.terminal.output.frame.AppFrame;
 import app.ui.terminal.output.OutStream;
-import app.ui.terminal.output.TerminalFrameElement;
 
 public abstract class BasicTerminalFrameElement implements TerminalFrameElement {
     protected AppFrame parent;
