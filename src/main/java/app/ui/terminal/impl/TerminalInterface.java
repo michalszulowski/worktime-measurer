@@ -1,12 +1,12 @@
 package app.ui.terminal.impl;
 
-import app.backend.concurrency.process.SimpleConcurrentProcess;
 import app.backend.engine.ActivitiesEngine;
 import app.backend.service.ActivitiesEngineService;
 import app.backend.service.AppService;
 import app.ui.AppInterface;
 import app.ui.terminal.TerminalSettings;
 import app.ui.terminal.impl.context.TerminalContext;
+import concurrency.process.SimpleConcurrentProcess;
 
 public abstract class TerminalInterface extends SimpleConcurrentProcess implements AppInterface {
     protected final ActivitiesEngineService appService;

@@ -1,6 +1,6 @@
 package app.ui.terminal.input;
 
-import app.backend.concurrency.process.SimpleConcurrentProcess;
+import concurrency.process.SimpleConcurrentProcess;
 
 import java.io.*;
 import java.util.ArrayList;

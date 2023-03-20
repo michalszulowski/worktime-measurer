@@ -39,6 +39,12 @@
 
         <dependency>
             <groupId>com.github.michalszulowski</groupId>
+            <artifactId>concurrent-processes</artifactId>
+            <version>7f744a5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.michalszulowski</groupId>
             <artifactId>text-command-parser</artifactId>
             <version>324125c</version>
         </dependency>
@@ -62,6 +68,7 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
