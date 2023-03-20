@@ -32,6 +32,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>3.23.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.michalszulowski</groupId>
             <artifactId>text-command-parser</artifactId>
             <version>324125c</version>
