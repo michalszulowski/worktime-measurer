@@ -88,13 +88,17 @@ public class LocalFilesystemEngine implements ActivitiesEngine {
         if (Files.exists(path))
             return;
         try {
-            //TODO redo using only Path
-            File file = new File(path.toUri());
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            createFileAt(path);
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }
+    }
+
+    private void createFileAt(Path path) throws IOException {
+        //TODO redo using only Path
+        File file = new File(path.toUri());
+        file.getParentFile().mkdirs();
+        file.createNewFile();
     }
 
     public static void main(String[] args) {

@@ -26,9 +26,15 @@ public class ShowingCurrentDayContext extends OneFrameContext {
         return new CurrentDayFrame(size.getWidth(), size.getHeight(), engine, owner.getLangMap(), timeSupplier.getTime());
     }
 
+    //TODO thing about changing commands name based on UiLangMap
+
     private static class ShowingCurrentDayCommandFactory extends DictionaryCommandFactory {
         public ShowingCurrentDayCommandFactory() {
-            //TODO add commands
+            //TODO implement
+            addCommand("start-session", l -> null);
+            addCommand("finish-session", l -> null);
+            addCommand("add-activity", l -> null);
+            addCommand("quit", l -> null);
         }
     }
 

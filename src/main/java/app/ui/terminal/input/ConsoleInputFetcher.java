@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleInputFetcher extends SimpleConcurrentProcess implements InputFetcher {
-    private boolean running;
     private List<InputObserver> observers;
-    private BufferedReader lineReader;
-    private InputStream inputStream;
+    private InputReader bufferedInputReader;
 
     public ConsoleInputFetcher() {
         this(System.in);
@@ -18,15 +16,13 @@ public class ConsoleInputFetcher extends SimpleConcurrentProcess implements Inpu
 
     public ConsoleInputFetcher(InputStream inputStream) {
         super("INPUT_FETCHER");
-        this.inputStream = inputStream;
-        running = true;
         observers = new ArrayList<>();
-        lineReader = new BufferedReader(new InputStreamReader(this.inputStream));
+        bufferedInputReader = new FromStreamBufferedReader(inputStream);
     }
 
     @Override
     protected void performMainLoopBody() {
-        String line = waitForLineAndRead();
+        String line = bufferedInputReader.waitForAndRead();
         notifyObservers(line);
     }
 
@@ -35,21 +31,13 @@ public class ConsoleInputFetcher extends SimpleConcurrentProcess implements Inpu
         observers.add(observer);
     }
 
-    private String waitForLineAndRead() {
-        try {
-            return lineReader.readLine();
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
     private void notifyObservers(String line) {
         observers.forEach(
                 observer -> observer.typed(line));
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        testInterrupting();
+        testSimpleObserver();
     }
 
     private static void testInterrupting() throws InterruptedException, IOException {
@@ -58,7 +46,6 @@ public class ConsoleInputFetcher extends SimpleConcurrentProcess implements Inpu
         fetcher.start();
         Thread.sleep(500);
         fetcher.getExecutionController().kill();
-        fetcher.inputStream.read();
         System.out.println("Closed stream");
     }
 

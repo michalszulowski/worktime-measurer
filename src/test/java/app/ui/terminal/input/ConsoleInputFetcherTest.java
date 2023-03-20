@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//TODO finish
+//TODO finish or maybe totally remove?
 class ConsoleInputFetcherTest {
     private static ConsoleInputFetcher inputFetcher;
     private static SavingObserver inputObserver;
@@ -42,6 +42,14 @@ class ConsoleInputFetcherTest {
         public List<String> getInput() {
             return receivedInput;
         }
+    }
+
+    public static void main(String[] args) {
+        String input = "aa\n bbb\bram";
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        InputReader inputReader = new FromStreamBufferedReader(inputStream);
+        String result = inputReader.waitForAndRead();
+        System.out.println(result);
     }
 
 }
