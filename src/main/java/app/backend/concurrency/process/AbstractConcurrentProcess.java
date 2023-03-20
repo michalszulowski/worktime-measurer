@@ -4,7 +4,6 @@ import app.backend.concurrency.SynchronizedValueKeeper;
 import app.backend.concurrency.state.IdleState;
 import app.backend.concurrency.state.ProcessState;
 
-//TODO add something like finalize but for process
 public abstract class AbstractConcurrentProcess extends AbstractControllableProcess {
     private volatile ProcessState currentState;
     private final SynchronizedValueKeeper<ProcessState> setStateKeeper;

@@ -2,8 +2,7 @@ package app.backend.time;
 
 import java.time.LocalDateTime;
 
-//TODO redo name
-public class SystemTimeSupplier implements TimeSupplier {
+public class CurrentTimeSupplier implements TimeSupplier {
 
     @Override
     public LocalDateTime getTime() {

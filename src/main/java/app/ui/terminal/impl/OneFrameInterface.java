@@ -36,10 +36,4 @@ public class OneFrameInterface extends TerminalInterface {
 
     }
 
-    //TODO maybe remove
-    public static void main(String[] args) {
-        TerminalSettings settings = new FixedSettings(new FixedSize(50, 70));
-
-    }
-
 }

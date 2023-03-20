@@ -1,5 +1,7 @@
 package app.backend.concurrency.process;
 
+import app.backend.concurrency.UncaughtThreadExceptionHandler;
+
 public abstract class AbstractControllableProcess implements ConcurrentProcess {
     private final Thread runThread;
     private final String name;
@@ -29,10 +31,13 @@ public abstract class AbstractControllableProcess implements ConcurrentProcess {
 
     protected abstract void performMainLoopBody();
 
+    //TODO rename maybe something like finalize
+    protected void freeResources() {}
+
     private Thread constructThread(String name) {
         Thread thread = new Thread(this::startMainLoop);
         thread.setName(name);
-        //thread.setUncaughtExceptionHandler();
+        thread.setUncaughtExceptionHandler(new UncaughtThreadExceptionHandler(this));
         return thread;
     }
 
@@ -42,8 +47,13 @@ public abstract class AbstractControllableProcess implements ConcurrentProcess {
                 performMainLoopBody();
                 checkForPendingControlActions();
             } catch (ProcessKilledException ex) {
-                running = false;
+                kill();
             }
         }
+    }
+
+    private void kill() {
+        running = false;
+        freeResources();
     }
 }

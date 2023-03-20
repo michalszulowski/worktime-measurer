@@ -72,14 +72,4 @@ public class CurrentDayFrame extends AppFrame {
         return result;
     }
 
-    //TODO remove
-    public static void main(String[] args) {
-        /*
-        String documentsPath = System.getProperty("user.home") + "/Documents/work-records/";
-        ActivitiesEngine engine = new LocalFilesystemEngine(Paths.get(documentsPath));
-        CurrentDayFrame frame = new CurrentDayFrame(40, 80, engine, new DirectLangMap(), time);
-        frame.print();
-         */
-    }
-
 }
