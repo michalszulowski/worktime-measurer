@@ -22,12 +22,17 @@ public abstract class AbstractControllableProcess implements ConcurrentProcess {
         return running;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
     protected abstract void performMainLoopBody();
 
     private Thread constructThread(String name) {
         Thread thread = new Thread(this::startMainLoop);
         thread.setName(name);
-        //thread.setUncaughtExceptionHandler(); TODO implement
+        //thread.setUncaughtExceptionHandler();
         return thread;
     }
 

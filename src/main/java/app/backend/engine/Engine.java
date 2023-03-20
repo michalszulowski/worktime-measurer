@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Kind of database interface. Gives access to records.
+ * Data interface. Gives access to records.
  */
 public interface Engine <V extends WorkRecord, T extends WorkDay<V> > {
     List<T> getDays(LocalDate from, LocalDate to);
