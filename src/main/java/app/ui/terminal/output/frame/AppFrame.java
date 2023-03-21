@@ -7,7 +7,7 @@ import app.lang.UiLangMap;
 import app.ui.terminal.output.OutStream;
 import app.ui.terminal.output.TerminalOutStream;
 
-public abstract class AppFrame extends AbstractTerminalFrame {
+public abstract class AppFrame extends JLineTerminalFrame {
     protected ActivitiesEngine appEngine;
     protected UiLangMap langMap;
     protected OutStream outStream;

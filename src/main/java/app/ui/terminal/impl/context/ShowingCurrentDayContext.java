@@ -5,16 +5,14 @@ import app.backend.time.TimeSupplier;
 import app.ui.terminal.TerminalSettings;
 import app.ui.terminal.TerminalSize;
 import app.ui.terminal.impl.OneFrameInterface;
+import app.ui.terminal.input.command.ForContextFactory;
 import app.ui.terminal.output.frame.CurrentDayFrame;
 import app.ui.terminal.output.frame.TerminalFrame;
-import command.factory.CommandFactory;
-import command.factory.DictionaryCommandFactory;
-
-import java.time.LocalDateTime;
+import command.Command;
 
 public class ShowingCurrentDayContext extends OneFrameContext {
     public ShowingCurrentDayContext(OneFrameInterface owner) {
-        super(owner, new ShowingCurrentDayCommandFactory());
+        super(owner, new ShowingCurrentDayCommandFactory(null)); //TODO pass this to factory
     }
 
     @Override
@@ -28,13 +26,20 @@ public class ShowingCurrentDayContext extends OneFrameContext {
 
     //TODO thing about changing commands name based on UiLangMap
 
-    private static class ShowingCurrentDayCommandFactory extends DictionaryCommandFactory {
-        public ShowingCurrentDayCommandFactory() {
+    private static class ShowingCurrentDayCommandFactory extends ForContextFactory<ShowingCurrentDayContext> {
+        public ShowingCurrentDayCommandFactory(ShowingCurrentDayContext context) {
+            super(context);
             //TODO implement
             addCommand("start-session", l -> null);
             addCommand("finish-session", l -> null);
             addCommand("add-activity", l -> null);
+            addCommand("ok", l -> null);
             addCommand("quit", l -> null);
+        }
+
+        @Override
+        protected Command noCommandFoundHandler(String info) {
+            return null; //TODO implement
         }
     }
 

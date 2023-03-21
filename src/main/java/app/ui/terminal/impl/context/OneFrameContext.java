@@ -5,7 +5,7 @@ import app.ui.terminal.impl.TerminalInterface;
 import app.ui.terminal.output.frame.TerminalFrame;
 import command.factory.CommandFactory;
 
-public abstract class OneFrameContext implements TerminalContext {
+public abstract class OneFrameContext implements TerminalContext<OneFrameInterface> {
     protected final OneFrameInterface owner;
     private final CommandFactory commandFactory;
 
@@ -25,4 +25,9 @@ public abstract class OneFrameContext implements TerminalContext {
     }
 
     protected abstract TerminalFrame createFrame();
+
+    @Override
+    public OneFrameInterface getOwner() {
+        return owner;
+    }
 }
