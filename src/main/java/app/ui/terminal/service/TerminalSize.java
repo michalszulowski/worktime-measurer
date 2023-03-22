@@ -1,4 +1,4 @@
-package app.ui.terminal;
+package app.ui.terminal.service;
 
 public interface TerminalSize {
     int getWidth();

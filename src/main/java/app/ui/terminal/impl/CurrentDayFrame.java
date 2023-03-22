@@ -1,18 +1,16 @@
-package app.ui.terminal.output.frame;
+package app.ui.terminal.impl;
 
 import app.backend.engine.ActivitiesEngine;
-import app.backend.engine.impl.local.LocalFilesystemEngine;
 import app.day.WorkDayWithActivities;
-import app.lang.DirectLangMap;
 import app.lang.UiLangMap;
 import app.record.ActivityMapWorkRecord;
+import app.ui.terminal.output.frame.AppFrame;
+import app.ui.terminal.service.TerminalService;
 import app.ui.terminal.output.element.DayProgressBar;
 import app.ui.terminal.output.element.RecentStatistics;
 import app.ui.terminal.output.element.SessionData;
 import app.ui.terminal.output.element.TerminalFrameElement;
 
-import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Optional;
@@ -23,9 +21,9 @@ public class CurrentDayFrame extends AppFrame {
     private TerminalFrameElement progressBar;
     private LocalDateTime time;
 
-    public CurrentDayFrame(int consoleWidth, int consoleHeight, ActivitiesEngine appEngine, UiLangMap langMap,
+    public CurrentDayFrame(TerminalService terminalService, ActivitiesEngine appEngine, UiLangMap langMap,
                            LocalDateTime time) {
-        super(consoleWidth, consoleHeight, appEngine, langMap);
+        super(terminalService, appEngine, langMap);
         this.time = time;
         initFrameElements();
     }
@@ -46,17 +44,17 @@ public class CurrentDayFrame extends AppFrame {
 
     private void printCurrentSessionData() {
         sessionData.print();
-        outStream.println();
+        terminalService.getOutStream().println();
     }
 
     private void printRecentStatistics() {
         recentStatistics.print();
-        outStream.println();
+        terminalService.getOutStream().println();
     }
 
     private void printProgressBar() {
         progressBar.print();
-        outStream.println();
+        terminalService.getOutStream().println();
     }
 
     //TODO think about maybe moving to app?

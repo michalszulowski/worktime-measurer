@@ -11,7 +11,7 @@ public abstract class BasicTerminalFrameElement implements TerminalFrameElement 
 
     public BasicTerminalFrameElement(AppFrame parent) {
         this.parent = parent;
-        this.outStream = parent.getOutStream();
+        this.outStream = parent.getTerminalService().getOutStream();
         this.langMap = parent.getLangMap();
     }
 }

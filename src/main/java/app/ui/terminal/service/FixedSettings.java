@@ -1,4 +1,4 @@
-package app.ui.terminal;
+package app.ui.terminal.service;
 
 public class FixedSettings implements TerminalSettings {
     private final TerminalSize size;

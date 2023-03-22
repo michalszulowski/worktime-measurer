@@ -34,13 +34,13 @@
         <dependency>
             <groupId>org.jline</groupId>
             <artifactId>jline</artifactId>
-            <version>RELEASE</version>
+            <version>3.21.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.michalszulowski</groupId>
             <artifactId>concurrent-processes</artifactId>
-            <version>7f744a5</version>
+            <version>9d04692</version>
         </dependency>
 
         <dependency>

@@ -6,7 +6,7 @@ import command.factory.DictionaryCommandFactory;
 import command.factory.NoSuchCommandException;
 
 public abstract class ForContextFactory <T extends TerminalContext<?>> extends DictionaryCommandFactory {
-    private T context;
+    protected T context;
 
     public ForContextFactory(T context) {
         this.context = context;
@@ -21,5 +21,5 @@ public abstract class ForContextFactory <T extends TerminalContext<?>> extends D
         }
     }
 
-    protected abstract Command noCommandFoundHandler(String info);
+    protected abstract Command noCommandFoundHandler(String enteredCommand);
 }
