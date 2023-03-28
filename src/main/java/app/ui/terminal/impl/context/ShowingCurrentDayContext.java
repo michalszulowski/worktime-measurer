@@ -27,11 +27,9 @@ public class ShowingCurrentDayContext extends OneFrameContext {
 
     @Override
     protected TerminalFrame createFrame() {
-        TerminalSettings terminalSettings = owner.getSettings();
         ActivitiesEngine engine = owner.getAppService().getEngine();
         TimeSupplier timeSupplier = owner.getAppService().getTimeSupplier();
-        TerminalSize size = terminalSettings.getSize();
-        return new CurrentDayFrame(size.getWidth(), size.getHeight(), engine, owner.getLangMap(), timeSupplier.getTime());
+        return new CurrentDayFrame(getOwner().getTerminalService(), engine, owner.getLangMap(), timeSupplier.getTime());
     }
 
     private static class ShowingCurrentDayCommandFactory extends ForContextFactory<ShowingCurrentDayContext> {

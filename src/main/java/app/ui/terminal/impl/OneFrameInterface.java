@@ -7,9 +7,7 @@ import app.backend.service.ActivitiesEngineServiceImpl;
 import app.backend.time.CurrentTimeSupplier;
 import app.lang.DirectLangMap;
 import app.lang.UiLangMap;
-import app.ui.terminal.service.FixedSettings;
-import app.ui.terminal.service.FixedSize;
-import app.ui.terminal.service.TerminalSettings;
+import app.ui.terminal.service.*;
 import app.ui.terminal.impl.context.ShowingCurrentDayContext;
 import app.ui.terminal.input.FromStreamBufferedReader;
 import app.ui.terminal.input.InputReader;
@@ -21,8 +19,8 @@ public class OneFrameInterface extends SingleProcessTerminalInterface {
     private final InputReader inputReader;
     private UiLangMap langMap;
 
-    public OneFrameInterface(TerminalSettings terminalSettings, ActivitiesEngineService appService, UiLangMap langMap) {
-        super(terminalSettings, appService);
+    public OneFrameInterface(TerminalService terminalService, ActivitiesEngineService appService, UiLangMap langMap) {
+        super(terminalService, appService);
         this.langMap = langMap;
         inputReader = new FromStreamBufferedReader(System.in);
         switchContext(new ShowingCurrentDayContext(this));
@@ -32,14 +30,19 @@ public class OneFrameInterface extends SingleProcessTerminalInterface {
         return langMap;
     }
 
+    public TerminalService getTerminalService() {
+        return terminalService;
+    }
+
     @Override
     protected void performMainLoopBody() {
         showFrame();
         waitForInputAndInvoke();
     }
 
+
     private void showFrame() {
-        //TODO clear terminal
+        terminalService.clear();
         context.printFrame();
     }
 
@@ -51,9 +54,10 @@ public class OneFrameInterface extends SingleProcessTerminalInterface {
 
     public static void main(String[] args) {
         TerminalSettings settings = new FixedSettings(new FixedSize(30, 50));
+        TerminalService terminalService = new FixedSettingsLinuxTerminalService(settings);
         ActivitiesEngine appEngine = new LocalFilesystemEngine(Paths.get("/home/michal/Documents/work-records/"));
         ActivitiesEngineService appService = new ActivitiesEngineServiceImpl(appEngine, new CurrentTimeSupplier());
-        OneFrameInterface terminalInterface = new OneFrameInterface(settings, appService, new DirectLangMap());
+        OneFrameInterface terminalInterface = new OneFrameInterface(terminalService, appService, new DirectLangMap());
         terminalInterface.show();
     }
 

@@ -2,19 +2,19 @@ package app.ui.terminal.impl;
 
 import app.backend.service.ActivitiesEngineService;
 import app.ui.AppInterface;
-import app.ui.terminal.service.TerminalSettings;
+import app.ui.terminal.service.TerminalService;
 import app.ui.terminal.impl.context.TerminalContext;
 import concurrency.process.SimpleConcurrentProcess;
 
 public abstract class SingleProcessTerminalInterface extends SimpleConcurrentProcess implements AppInterface {
     protected final ActivitiesEngineService appService;
     protected TerminalContext<?> context;
-    protected TerminalSettings terminalSettings;
+    protected TerminalService terminalService;
 
-    public SingleProcessTerminalInterface(TerminalSettings terminalSettings, ActivitiesEngineService appService) {
+    public SingleProcessTerminalInterface(TerminalService terminalService, ActivitiesEngineService appService) {
         super("TERMINAL_INTERFACE");
         this.appService = appService;
-        this.terminalSettings = terminalSettings;
+        this.terminalService = terminalService;
     }
 
     @Override
@@ -26,8 +26,8 @@ public abstract class SingleProcessTerminalInterface extends SimpleConcurrentPro
         context = newContext;
     }
 
-    public TerminalSettings getSettings() {
-        return terminalSettings;
+    public TerminalService getSettings() {
+        return terminalService;
     }
 
     public ActivitiesEngineService getAppService() {
