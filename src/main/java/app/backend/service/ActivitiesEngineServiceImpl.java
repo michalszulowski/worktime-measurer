@@ -4,6 +4,7 @@ import app.backend.engine.ActivitiesEngine;
 import app.backend.time.TimeSupplier;
 import app.day.WorkDayWithActivities;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class ActivitiesEngineServiceImpl implements ActivitiesEngineService {
@@ -27,7 +28,7 @@ public class ActivitiesEngineServiceImpl implements ActivitiesEngineService {
 
     @Override
     public Optional<WorkDayWithActivities> getActiveDay() {
-        //TODO implement
-        return Optional.empty();
+        LocalDate date = getTimeSupplier().getTime().toLocalDate();
+        return getEngine().getDay(date);
     }
 }

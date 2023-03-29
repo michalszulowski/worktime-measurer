@@ -8,14 +8,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class StartSessionCommand extends ForContextCommand<ShowingCurrentDayContext> {
+    private String description;
 
     public StartSessionCommand(ShowingCurrentDayContext context, List<String> args) {
         super(context, args);
+        expectArgsCount(1);
+        description = arguments.get(0);
     }
 
     @Override
     public void invoke() {
-        String description = args.get(0);
         LocalDateTime time = appService.getTimeSupplier().getTime();
         appService.getEngine().addRecord(time.toLocalDate(), new ActivityMapWorkRecord(time, null, description));
     }

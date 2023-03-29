@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.github.michalszulowski</groupId>
             <artifactId>text-command-parser</artifactId>
-            <version>324125c</version>
+            <version>4349c5e</version>
         </dependency>
 
         <dependency>

@@ -2,6 +2,7 @@ package app.ui.terminal.impl.context;
 
 import app.backend.engine.ActivitiesEngine;
 import app.backend.time.TimeSupplier;
+import app.ui.terminal.impl.command.AddActivityCommand;
 import app.ui.terminal.impl.command.StartSessionCommand;
 import app.ui.terminal.service.TerminalSettings;
 import app.ui.terminal.service.TerminalSize;
@@ -41,11 +42,7 @@ public class ShowingCurrentDayContext extends OneFrameContext {
                 //add whole day
                 return null;
             });
-            addCommand("add-activity", l -> {
-                //parse activity
-                //add whole day
-                return null;
-            });
+            addCommand("add-activity", args -> new AddActivityCommand(context, args));
             //TODO exit day
             //addCommand("ok", l -> null);
             addCommand("quit", l -> null);
