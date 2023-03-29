@@ -6,6 +6,7 @@ import app.util.Time;
 import com.google.gson.Gson;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
@@ -14,8 +15,10 @@ import java.util.*;
 @EqualsAndHashCode
 public class WorkDayWithActivities implements WorkDay<ActivityMapWorkRecord> {
     private List<ActivityMapWorkRecord> records;
+    private final LocalDate date;
 
-    public WorkDayWithActivities() {
+    public WorkDayWithActivities(LocalDate date) {
+        this.date = date;
         records = new ArrayList<>();
     }
 
@@ -45,6 +48,20 @@ public class WorkDayWithActivities implements WorkDay<ActivityMapWorkRecord> {
                 .sum();
     }
 
+    @Override
+    public LocalDate getDate() {
+        return date;
+    }
+
+    @Override
+    public Optional<ActivityMapWorkRecord> getActiveRecord() {
+        Optional<ActivityMapWorkRecord> activeRecord = getRecords().stream()
+                .sorted(Comparator.comparing(ActivityMapWorkRecord::getStart).reversed())
+                .filter(record -> record.getEnd() == null)
+                .findFirst();
+        return activeRecord;
+    }
+
     // --- TESTS ---
 
     public static void main(String[] args) {
@@ -60,7 +77,7 @@ public class WorkDayWithActivities implements WorkDay<ActivityMapWorkRecord> {
 
     public static WorkDayWithActivities generateSampleDay() {
         LocalDateTime referenceDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-        WorkDayWithActivities workDay = new WorkDayWithActivities();
+        WorkDayWithActivities workDay = new WorkDayWithActivities(LocalDate.of(1990, 1, 1));
         ActivityMapWorkRecord workRecord1 = new ActivityMapWorkRecord(referenceDateTime,
                 referenceDateTime.plusHours(1), "Zadania1");
         workRecord1.addActivity(new Activity("Praca1"), 1);

@@ -24,8 +24,7 @@ public class WrongCommandContext extends OneFrameContext {
 
     @Override
     protected TerminalFrame createFrame() {
-        ActivitiesEngine engine = owner.getAppService().getEngine();
-        return new WrongCommandFrame(getOwner().getTerminalService(), engine, owner.getLangMap(), commandEntered);
+        return new WrongCommandFrame(getOwner().getTerminalService(), getOwner().getAppService(), owner.getLangMap(), commandEntered);
     }
 
     @Override

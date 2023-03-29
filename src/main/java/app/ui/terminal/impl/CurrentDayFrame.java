@@ -1,6 +1,7 @@
 package app.ui.terminal.impl;
 
 import app.backend.engine.ActivitiesEngine;
+import app.backend.service.ActivitiesEngineService;
 import app.day.WorkDayWithActivities;
 import app.lang.UiLangMap;
 import app.record.ActivityMapWorkRecord;
@@ -21,9 +22,9 @@ public class CurrentDayFrame extends AppFrame {
     private TerminalFrameElement progressBar;
     private LocalDateTime time;
 
-    public CurrentDayFrame(TerminalService terminalService, ActivitiesEngine appEngine, UiLangMap langMap,
+    public CurrentDayFrame(TerminalService terminalService, ActivitiesEngineService appService, UiLangMap langMap,
                            LocalDateTime time) {
-        super(terminalService, appEngine, langMap);
+        super(terminalService, appService, langMap);
         this.time = time;
         initFrameElements();
     }
@@ -36,7 +37,7 @@ public class CurrentDayFrame extends AppFrame {
     }
 
     private void initFrameElements() {
-        Optional<ActivityMapWorkRecord> currentRecord = getActiveWorkRecord(time);
+        Optional<ActivityMapWorkRecord> currentRecord = extractCurrentRecord();
         sessionData = new SessionData(this, currentRecord.orElse(null), time);
         recentStatistics = new RecentStatistics(this, time.toLocalDate());
         progressBar = new DayProgressBar(this, time.toLocalDate());
@@ -57,17 +58,11 @@ public class CurrentDayFrame extends AppFrame {
         terminalService.getOutStream().println();
     }
 
-    //TODO think about maybe moving to app?
-    private Optional<ActivityMapWorkRecord> getActiveWorkRecord(LocalDateTime time) {
-        Optional<WorkDayWithActivities> workDay = appEngine.getDay(time.toLocalDate());
-        if (workDay.isEmpty())
-            return Optional.empty();
-        Optional<ActivityMapWorkRecord> result = workDay.get()
-                .getRecords().stream()
-                .sorted(Comparator.comparing(ActivityMapWorkRecord::getStart).reversed())
-                .filter(record -> record.getEnd() == null && record.getStart().isBefore(time))
-                .findFirst();
-        return result;
+    private Optional<ActivityMapWorkRecord> extractCurrentRecord() {
+        Optional<WorkDayWithActivities> day = appService.getActiveDay();
+        Optional<ActivityMapWorkRecord> foundRecord =
+                day.isPresent() ? day.get().getActiveRecord() : Optional.empty();
+        return foundRecord;
     }
 
 }

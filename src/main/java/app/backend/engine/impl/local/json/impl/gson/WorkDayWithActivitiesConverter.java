@@ -7,6 +7,7 @@ import app.record.ActivityMap;
 import com.google.gson.GsonBuilder;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class WorkDayWithActivitiesConverter extends GsonConverter<WorkDayWithActivities> {
@@ -14,6 +15,7 @@ public class WorkDayWithActivitiesConverter extends GsonConverter<WorkDayWithAct
     public WorkDayWithActivitiesConverter() {
         gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeAndSerializer())
+                .registerTypeAdapter(LocalDate.class, new LocalDateDeAndSerializer())
                 .registerTypeAdapter(Duration.class, new DurationDeAndSerializer())
                 .registerTypeAdapter(Activity.class, new ActivityDeAndSerializer())
                 .registerTypeAdapter(ActivityMap.class, new ActivityMapDeserializer())

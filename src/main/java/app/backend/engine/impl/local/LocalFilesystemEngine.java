@@ -28,6 +28,7 @@ import java.util.Optional;
  * Manages records. Each day is stored in .json file in directory of its month which is stored in directory of its year.
  * For example record of day of 1970-01-01 will be stored in root/1970/01/01.json (YYYY/MM/DD).json
  */
+//TODO add caching already loaded days
 public class LocalFilesystemEngine implements ActivitiesEngine {
     private Path rootDir;
     private Reader fileReader;
@@ -69,7 +70,7 @@ public class LocalFilesystemEngine implements ActivitiesEngine {
 
     @Override
     public void addRecord(LocalDate at, ActivityMapWorkRecord record) {
-        WorkDayWithActivities workDay = getDay(at).orElseGet(WorkDayWithActivities::new);
+        WorkDayWithActivities workDay = getDay(at).orElseGet(() -> new WorkDayWithActivities(at));
         workDay.add(record);
         putDay(at, workDay);
     }
