@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class StartSessionCommand extends ForContextCommand<ShowingCurrentDayContext> {
+public class StartSessionCommand extends EditingActivityCommand {
     private String description;
 
     public StartSessionCommand(ShowingCurrentDayContext context, List<String> args) {

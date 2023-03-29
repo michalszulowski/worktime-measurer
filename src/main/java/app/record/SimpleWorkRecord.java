@@ -34,6 +34,22 @@ public class SimpleWorkRecord implements WorkRecord {
         return description;
     }
 
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setSubtractedTime(Duration subtractedTime) {
+        this.subtractedTime = subtractedTime;
+    }
+
     //TODO think about moving to interface
     public Duration calculateTotalTime() {
         LocalDateTime actualEnd = end;

@@ -3,4 +3,5 @@
 
 Showing current day:
 * start-session: description
+* finish-session
 * add-activity: description, (float) wage, ? category

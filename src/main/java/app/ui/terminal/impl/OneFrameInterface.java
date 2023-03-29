@@ -40,7 +40,6 @@ public class OneFrameInterface extends SingleProcessTerminalInterface {
         waitForInputAndInvoke();
     }
 
-
     private void showFrame() {
         terminalService.clear();
         context.printFrame();

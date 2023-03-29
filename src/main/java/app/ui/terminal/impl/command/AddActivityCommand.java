@@ -9,7 +9,7 @@ import app.ui.terminal.impl.context.ShowingCurrentDayContext;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class AddActivityCommand extends ForContextCommand<ShowingCurrentDayContext>{
+public class AddActivityCommand extends EditingActivityCommand {
     private String description;
     private float wage;
 
@@ -29,16 +29,6 @@ public class AddActivityCommand extends ForContextCommand<ShowingCurrentDayConte
         Activity activity = parseActivity();
         workRecord.addActivity(activity, wage);
         appService.getEngine().putDay(activeDay.getDate(), activeDay);
-    }
-
-    private WorkDayWithActivities getActiveDay() {
-        return appService.getActiveDay()
-                .orElseThrow(() -> new IllegalStateException("No active day"));
-    }
-
-    private ActivityMapWorkRecord getActiveRecord(WorkDayWithActivities day) {
-        return day.getActiveRecord()
-                .orElseThrow(() -> new IllegalStateException("No active session"));
     }
 
     private Activity parseActivity() {
