@@ -1,11 +1,9 @@
 package app.ui.terminal.impl.context;
 
-import app.backend.engine.ActivitiesEngine;
-import app.ui.terminal.service.TerminalSettings;
-import app.ui.terminal.service.TerminalSize;
 import app.ui.terminal.impl.OneFrameInterface;
+import app.ui.terminal.impl.frame.WrongCommandFrame;
 import app.ui.terminal.input.command.ForContextFactory;
-import app.ui.terminal.impl.SwitchContextCommand;
+import app.ui.terminal.impl.command.SwitchContextCommand;
 import app.ui.terminal.output.frame.TerminalFrame;
 import command.Command;
 import command.factory.CommandFactory;
@@ -42,7 +40,7 @@ public class WrongCommandContext extends OneFrameContext {
         }
 
         @Override
-        protected Command noCommandFoundHandler(String enteredCommand) {
+        protected Command getNoCommandFoundCommand(String enteredCommand) {
             return new SwitchContextCommand(context, context.getPreviousContext());
         }
     }

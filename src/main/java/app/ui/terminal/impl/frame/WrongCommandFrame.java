@@ -1,4 +1,4 @@
-package app.ui.terminal.impl.context;
+package app.ui.terminal.impl.frame;
 
 import app.backend.engine.ActivitiesEngine;
 import app.backend.service.ActivitiesEngineService;

@@ -1,4 +1,4 @@
-package app.ui.terminal.impl;
+package app.ui.terminal.impl.command;
 
 import app.ui.terminal.impl.SingleProcessTerminalInterface;
 import app.ui.terminal.impl.context.TerminalContext;
