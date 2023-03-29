@@ -15,7 +15,7 @@ public class WrongCommandFrame extends AppFrame {
     }
 
     @Override
-    public void print() {
+    protected void printContent() {
         terminalService.getOutStream().println(langMap.getText("Typed wrong command") + ": " + enteredCommand);
     }
 }

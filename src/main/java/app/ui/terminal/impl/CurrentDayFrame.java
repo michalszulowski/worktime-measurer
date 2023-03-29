@@ -30,7 +30,7 @@ public class CurrentDayFrame extends AppFrame {
     }
 
     @Override
-    public void print() {
+    protected void printContent() {
         printCurrentSessionData();
         printRecentStatistics();
         printProgressBar();

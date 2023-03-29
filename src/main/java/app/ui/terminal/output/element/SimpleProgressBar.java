@@ -1,6 +1,7 @@
 package app.ui.terminal.output.element;
 
 import app.ui.terminal.output.OutStream;
+import app.util.TextUtils;
 
 public class SimpleProgressBar implements TerminalFrameElement {
     private OutStream outStream;
@@ -53,23 +54,15 @@ public class SimpleProgressBar implements TerminalFrameElement {
 
     private void printStandardBar(int numberOfFullTiles, int numberOfSpaces) {
         outStream.print(STARTING_SEQ);
-        outStream.print(generateCharSeq(FULL_TILE, numberOfFullTiles));
-        outStream.print(generateCharSeq(SPACE, numberOfSpaces));
+        outStream.print(TextUtils.generateCharSeq(FULL_TILE, numberOfFullTiles));
+        outStream.print(TextUtils.generateCharSeq(SPACE, numberOfSpaces));
         outStream.println(CLOSING_SEQ);
     }
 
     private void printSurpassingBar(int numberOfTilesInsideBar, int tilesOutOfBar) {
         outStream.print(STARTING_SEQ);
-        outStream.print(generateCharSeq(FULL_TILE, numberOfTilesInsideBar));
+        outStream.print(TextUtils.generateCharSeq(FULL_TILE, numberOfTilesInsideBar));
         outStream.print(CLOSING_SEQ);
-        outStream.println(generateCharSeq(FULL_TILE, tilesOutOfBar));
-    }
-
-    private String generateCharSeq(char c, int n) {
-        StringBuilder sBuilder = new StringBuilder();
-        for (int i = 0; i < n; i++) {
-            sBuilder.append(c);
-        }
-        return sBuilder.toString();
+        outStream.println(TextUtils.generateCharSeq(FULL_TILE, tilesOutOfBar));
     }
 }
