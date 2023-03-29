@@ -1,0 +1,6 @@
+(X) - expected type X, String if no specified
+? - optional arg
+
+Showing current day:
+* start-session: description
+* add-activity: description, (float) wage, ? category
