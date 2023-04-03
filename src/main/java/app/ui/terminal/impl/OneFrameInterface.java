@@ -55,7 +55,7 @@ public class OneFrameInterface extends SingleProcessTerminalInterface {
     public static void main(String[] args) {
         TerminalSettings settings = new FixedSettings(new FixedSize(30, 50));
         TerminalService terminalService = new FixedSettingsLinuxTerminalService(settings);
-        ActivitiesEngine appEngine = new LocalFilesystemEngine(Paths.get("/home/michal/Documents/work-records/"));
+        ActivitiesEngine appEngine = new LocalFilesystemEngine(Paths.get("~/Documents/work-records/"));
         ActivitiesEngineService appService = new ActivitiesEngineServiceImpl(appEngine, new CurrentTimeSupplier());
         OneFrameInterface terminalInterface = new OneFrameInterface(terminalService, appService, new DirectLangMap());
         terminalInterface.show();

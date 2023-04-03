@@ -1,0 +1,3 @@
+filesystem_engine_root=~/Documents/work-records/
+terminal.width=30
+terminal.height=50
