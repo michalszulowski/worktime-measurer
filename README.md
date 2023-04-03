@@ -6,7 +6,7 @@ The main goal of this project was not to develop numerous functionalities, espec
 
 ### Selected elements
 - Serialization of objects with collections to JSON with GSON library
-- Unit test with JUnit
+- Unit tests with JUnit
 - Usage of my other project as external dependencies
 - Usage of Lombok
 - Added support for usage of different languages
