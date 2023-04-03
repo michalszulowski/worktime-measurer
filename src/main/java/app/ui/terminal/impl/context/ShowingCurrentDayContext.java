@@ -39,12 +39,6 @@ public class ShowingCurrentDayContext extends OneFrameContext {
             //addCommand("ok", l -> null);
             addCommand("refresh", args -> new EmptyCommand());
         }
-
-        @Override
-        protected Command getNoCommandFoundCommand(String enteredCommand) {
-            return new SwitchContextCommand(
-                    context, new WrongCommandContext(context.getOwner(), context, enteredCommand));
-        }
     }
 
 }

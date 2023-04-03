@@ -7,6 +7,7 @@ import app.backend.service.ActivitiesEngineServiceImpl;
 import app.backend.time.CurrentTimeSupplier;
 import app.lang.DirectLangMap;
 import app.lang.UiLangMap;
+import app.ui.terminal.impl.context.WelcomeScreenContext;
 import app.ui.terminal.service.*;
 import app.ui.terminal.impl.context.ShowingCurrentDayContext;
 import app.ui.terminal.input.FromStreamBufferedReader;
@@ -23,7 +24,7 @@ public class OneFrameInterface extends SingleProcessTerminalInterface {
         super(terminalService, appService);
         this.langMap = langMap;
         inputReader = new FromStreamBufferedReader(System.in);
-        switchContext(new ShowingCurrentDayContext(this));
+        switchContext(new WelcomeScreenContext(this));
     }
 
     public UiLangMap getLangMap() {
