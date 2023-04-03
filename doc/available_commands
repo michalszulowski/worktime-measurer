@@ -1,6 +1,9 @@
 (X) - expected type X, String if no specified
 ? - optional arg
 
+General:
+* exit
+
 Showing current day:
 * start-session: description
 * finish-session
@@ -8,3 +11,5 @@ Showing current day:
 
 Welcome screen:
 * open-day
+
+

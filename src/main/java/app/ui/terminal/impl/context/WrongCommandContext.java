@@ -10,19 +10,20 @@ import command.factory.CommandFactory;
 
 public class WrongCommandContext extends OneFrameContext {
     private OneFrameContext previousContext;
-    private String commandEntered;
+    private String errorMessageContent;
     private final CommandFactory commandFactory;
 
-    public WrongCommandContext(OneFrameInterface owner, OneFrameContext previousContext, String commandEntered) {
+    public WrongCommandContext(OneFrameInterface owner, OneFrameContext previousContext, String errorMessageContent) {
         super(owner);
         this.previousContext = previousContext;
-        this.commandEntered = commandEntered;
+        this.errorMessageContent = errorMessageContent;
         commandFactory = new WrongCommandCommandFactory(this);
     }
 
     @Override
     protected TerminalFrame createFrame() {
-        return new WrongCommandFrame(getOwner().getTerminalService(), getOwner().getAppService(), owner.getLangMap(), commandEntered);
+        return new WrongCommandFrame(getOwner().getTerminalService(), getOwner().getAppService(),
+                owner.getLangMap(), errorMessageContent);
     }
 
     @Override
