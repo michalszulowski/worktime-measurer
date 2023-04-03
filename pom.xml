@@ -46,8 +46,8 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <id>make-assembly</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
@@ -69,6 +69,12 @@
             <groupId>org.jline</groupId>
             <artifactId>jline</artifactId>
             <version>3.21.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.michalszulowski</groupId>
+            <artifactId>java-utils</artifactId>
+            <version>191d4d2</version>
         </dependency>
 
         <dependency>
