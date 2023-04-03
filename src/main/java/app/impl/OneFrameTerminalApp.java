@@ -11,14 +11,14 @@ import app.ui.terminal.impl.OneFrameInterface;
 import app.ui.terminal.service.TerminalService;
 
 public class OneFrameTerminalApp implements MeasurerApp {
-    private final TerminalService terminalService;
     private final ActivitiesEngine appEngine;
+    private final TerminalService terminalService;
     private AppInterface userInterface;
     private ActivitiesEngineService appService;
 
-    public OneFrameTerminalApp(TerminalService terminalService, ActivitiesEngine appEngine) {
-        this.terminalService = terminalService;
+    public OneFrameTerminalApp(ActivitiesEngine appEngine, TerminalService terminalService) {
         this.appEngine = appEngine;
+        this.terminalService = terminalService;
     }
 
     @Override
