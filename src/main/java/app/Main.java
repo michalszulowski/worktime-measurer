@@ -1,3 +1,5 @@
+package app;
+
 import app.MeasurerApp;
 import app.loader.AppLoader;
 import app.loader.ConfigFileOneFrameTerminalAppLoader;

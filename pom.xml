@@ -40,7 +40,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>app.ui.terminal.impl.OneFrameInterface</mainClass>
+                            <mainClass>app.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
