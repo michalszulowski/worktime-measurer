@@ -26,24 +26,30 @@ public class RecentStatistics extends BasicTerminalFrameElement {
     private void printThatDayWorkTime() {
         LocalDate today = day;
         double todaysWorkTime = statisticsCalculator.getTotalHoursWorkedIn(today, today);
-        outStream.println(langMap.getText("Today worked") + ": " + todaysWorkTime);
+        outStream.println(langMap.getText("Today worked") + ": " + formatDouble(todaysWorkTime));
     }
 
     private void printDayBeforeWorkTime() {
         LocalDate dayBefore = day.minusDays(1);
         double dayBeforeWorkTime = statisticsCalculator.getAverageHoursWorkedIn(dayBefore, dayBefore);
-        outStream.println(langMap.getText("Yesterday worked") + ": " + dayBeforeWorkTime);
+        outStream.println(langMap.getText("Yesterday worked") + ": " + formatDouble(dayBeforeWorkTime));
     }
 
     private void printLastWeekAverage() {
         LocalDate startOfTheWeek = day.minusDays(7);
         double lastWeekAverageWorkTime = statisticsCalculator.getAverageHoursWorkedIn(startOfTheWeek, day);
-        outStream.println(langMap.getText("Average work time in last week") + ": " + lastWeekAverageWorkTime);
+        outStream.println(langMap.getText("Average work time in last week") + ": "
+                + formatDouble(lastWeekAverageWorkTime));
     }
 
     private void printLastMonthAverage() {
         LocalDate startOfTheMonth = day.minusDays(30);
         double lastMonthAverageWorkTime = statisticsCalculator.getAverageHoursWorkedIn(startOfTheMonth, day);
-        outStream.println(langMap.getText("Average work time in last month") + ": " + lastMonthAverageWorkTime);
+        outStream.println(langMap.getText("Average work time in last month") + ": "
+                + formatDouble(lastMonthAverageWorkTime));
+    }
+
+    private String formatDouble(double number) {
+        return String.format("%.2f", number);
     }
 }
