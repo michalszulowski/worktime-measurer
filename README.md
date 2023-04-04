@@ -5,10 +5,10 @@ The application storing you work time and activities. Counts time statistics and
 The main goal of this project was not to develop numerous functionalities, especially it was not created to make the UI look pretty. This app is a demonstration of my style of writing code. I have put a lot of effort to make the code clean and extensible. I also tried to use a few new technologies. 
 
 ### Selected elements
-- Serialization of objects with collections to JSON with GSON library
-- Unit tests with JUnit
+- Unit tests with **JUnit**
+- Usage of **Lombok**
+- Serialization of objects with collections to JSON with **GSON library**
 - Usage of my other project as external dependencies
-- Usage of Lombok
 - Added support for usage of different languages
 
 ## Usage example 
