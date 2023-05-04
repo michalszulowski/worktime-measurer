@@ -3,15 +3,17 @@ package app.backend.engine.impl.local.json.impl.gson;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// TODO think about tests convention. Do I want to use just given-when-then comments or I want to pack it to methods.
+// Do I really need to stick to one way?
 class LocalDateDeAndSerializerTest {
-    private static final LocalDate EXAMPLE_DATE =
-            LocalDate.of(1999, 6, 11);
+    private static final LocalDate EXAMPLE_DATE = LocalDate.parse("1999-06-11");
     private static Gson gson;
     private static LocalDate dateParam;
     private static String jsonResult;
@@ -19,8 +21,8 @@ class LocalDateDeAndSerializerTest {
     private static LocalDate dateResult;
 
 
-    @BeforeAll
-    public static void initGson() {
+    @BeforeEach
+    public void initGson() {
         gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateDeAndSerializer())
                 .create();

@@ -19,6 +19,7 @@ class WorkDayWithActivitiesConverterTest {
         jsonConverter = new WorkDayWithActivitiesConverter();
     }
 
+    //TODO think about redoing this method
     @Test
     public void testSerializationAndDeserialization() {
         WorkDayWithActivities sampleDay = WorkDayWithActivities.generateSampleDay();

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 public class SimpleReader implements Reader {
     @Override
@@ -18,12 +19,8 @@ public class SimpleReader implements Reader {
 
     private String readWholeFile(Path path) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = Files.newBufferedReader(path)) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                contentBuilder.append(line);
-            }
-        }
+        List<String> lines = Files.readAllLines(path);
+        lines.forEach(contentBuilder::append);
         return contentBuilder.toString();
     }
 }
